@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaDocs AI - Smart AI Document Scanning & Cloud Sync</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['Fira Code', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom animations for laser scan effect */
+    @keyframes sweep {
+      0%, 100% { top: 0%; }
+      50% { top: 100%; }
+    }
+    .laser-line {
+      animation: sweep 2s infinite ease-in-out;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .pulsing-glow {
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-[#070a13] text-slate-300 font-sans antialiased min-h-screen">
+
+  <!-- Floating Glow Orbs -->
+  <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+
+  <!-- Header Navigation -->
+  <header class="sticky top-0 bg-[#070a13]/85 backdrop-blur-md border-b border-slate-900/85 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white shadow-md shadow-blue-500/30 text-sm tracking-tighter">
+          ND
+        </div>
+        <span class="text-white font-display font-bold text-lg tracking-tight">NovaDocs <span class="text-blue-500">AI</span></span>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+        <a href="#features" class="hover:text-white transition-colors">Features</a>
+        <a href="#scanner-simulator" class="hover:text-white transition-colors">Interactive Demo</a>
+        <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+        <a href="#privacy" class="hover:text-white transition-colors">Privacy</a>
+        <a href="#terms" class="hover:text-white transition-colors">Terms</a>
+        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://play.google.com/store/apps/details?id=com.cosmoscode.novadocsai" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all shadow-md shadow-blue-600/25">
+          Get on Play Store
+        </a>
+        <button id="mobile-menu-toggle" class="md:hidden p-2 text-slate-400 hover:text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#070a13] border-b border-slate-900 px-4 py-4 space-y-3">
+      <a href="#features" class="block text-slate-400 hover:text-white text-sm py-1.5 font-medium">Features</a>
+      <a href="#scanner-simulator" class="block text-slate-400 hover:text-white text-sm py-1.5 font-medium">Interactive Demo</a>
+      <a href="#pricing" class="block text-slate-400 hover:text-white text-sm py-1.5 font-medium">Pricing</a>
+      <a href="#privacy" class="block text-slate-400 hover:text-white text-sm py-1.5 font-medium">Privacy Policy</a>
+      <a href="#terms" class="block text-slate-400 hover:text-white text-sm py-1.5 font-medium">Terms of Service</a>
+      <a href="#contact" class="block text-slate-400 hover:text-white text-sm py-1.5 font-medium">Contact</a>
+      <a href="https://play.google.com/store/apps/details?id=com.cosmoscode.novadocsai" target="_blank" rel="noopener noreferrer" class="block text-center bg-blue-600 text-white font-semibold text-xs py-2 rounded-xl">Get on Play Store</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Hero Text -->
+        <div class="lg:col-span-7 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-semibold mb-6">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <span>Google Gemini 3.1 Flash Lite-Powered PDF Scanner</span>
+          </div>
+          
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+            Scan Smarter. <br class="hidden sm:inline">Organize Instantly.
+          </h1>
+          
+          <p class="text-slate-400 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8">
+            NovaDocs AI leverages high-performance Vision Intelligence to automatically scan physical paper, categorize your receipts or medical reports, suggest best filenames, and back up files perfectly to your Google Drive.
+          </p>
+
+          <div id="download" class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+            <a href="https://play.google.com/store/apps/details?id=com.cosmoscode.novadocsai" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-blue-600/30 transition-all active:scale-95">
+              <!-- Play store vector icon representation -->
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M5,3.23C5.18,3.05 5.5,3 5.86,3c0.12,0 0.26,0 0.42,0.02L16,11.5L6.28,20.84C5.9,20.93 5.57,20.9 5.34,20.73L5,20.39V3.23 M17.47,12.5L20.64,14.33c0.55,0.32 0.55,0.85 0,1.17L17.47,17.33L16.5,12.5L17.47,12.5 M6.28,3.06C6.5,3.03 6.78,3 7.09,3c0.44,0 0.94,0.1 1.48,0.33l9,5.17L12,12.5L6.28,3.06 M6.28,20.83L12,11.5l5.58,4.17l-9,5.17c-0.54,0.31-1.04,0.33-1.48,0.33c-0.31,0-0.59-0.03-0.82-0.06L6.28,20.83z"/>
+              </svg>
+              <span>Download on Google Play</span>
+            </a>
+            <span class="text-xs font-mono text-slate-500">Requirements: Android 10+ & Google Account</span>
+          </div>
+
+          <!-- Feature micro bullets -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-slate-900 pt-8 max-w-lg mx-auto lg:mx-0">
+            <div>
+              <div class="text-white font-display font-bold text-2xl">99.2%</div>
+              <div class="text-xs text-slate-500 mt-1">Vision AI Accuracy</div>
+            </div>
+            <div>
+              <div class="text-white font-display font-bold text-2xl">&lt; 3s</div>
+              <div class="text-xs text-slate-500 mt-1">Full Drive Upload</div>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <div class="text-white font-display font-bold text-2xl">Stateless</div>
+              <div class="text-xs text-slate-500 mt-1">Absolute Data Privacy</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Showcase (Interactive SVG Device Representation) -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-[280px] aspect-[9/18] bg-slate-950 rounded-[40px] border-[5px] border-slate-800 shadow-2xl overflow-hidden ring-1 ring-slate-700/50">
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-slate-950 rounded-b-2xl z-20 flex items-center justify-center">
+              <div class="w-12 h-1 bg-slate-800 rounded-full mb-1"></div>
+            </div>
+
+            <!-- Inside Mockup -->
+            <div class="p-3 pt-8 h-full bg-[#080d1a] flex flex-col justify-between text-xs">
+              <div class="flex items-center justify-between text-slate-400 border-b border-slate-900 pb-2 mb-3">
+                <span class="font-bold text-[10px]">NovaDocs Scanner</span>
+                <span class="text-[9px] text-emerald-400 flex items-center gap-1">
+                  <span class="w-1 h-1 bg-emerald-400 rounded-full"></span> Active
+                </span>
+              </div>
+
+              <!-- Animated Scanner Graphic -->
+              <div class="flex-1 bg-slate-950/80 rounded-2xl border border-slate-800/80 p-3 flex flex-col justify-between relative overflow-hidden">
+                <div class="border-b border-slate-800/80 pb-1.5 text-[8px] font-mono flex justify-between text-slate-500">
+                  <span>BILL_INVOICE.PNG</span>
+                  <span>9.2 KB</span>
+                </div>
+                
+                <div class="my-auto py-2 text-center text-slate-400">
+                  <svg class="w-8 h-8 text-blue-500 mx-auto mb-2 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  <p class="text-[9px] font-mono text-slate-300">Scanning content...</p>
+                </div>
+
+                <div class="text-[7px] font-mono text-blue-400/80 bg-blue-500/5 border border-blue-500/10 p-1.5 rounded">
+                  AI: invoice_utilities_comcast_2026.pdf
+                </div>
+
+                <!-- Sweeping laser line -->
+                <div class="laser-line absolute left-0 right-0 h-0.5 bg-blue-500 shadow-md shadow-blue-400"></div>
+              </div>
+
+              <!-- Bottom sync status -->
+              <div class="mt-3 flex items-center justify-between text-[9px] text-slate-400 border-t border-slate-900 pt-2">
+                <span>Google Cloud Sync</span>
+                <span class="text-indigo-400 font-bold">100% Backed Up</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section id="features" class="py-20 bg-slate-950/50 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-semibold text-blue-500 uppercase tracking-widest block mb-2">Core capabilities</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
+          Smarter Scanner App Features
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          NovaDocs AI was designed from scratch to strip away the manual friction of saving papers, receipts, and files.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- Feature 1 -->
+        <div class="bg-[#0f172a]/40 border border-slate-900 hover:border-slate-800 p-6 rounded-2xl transition-all duration-300 group">
+          <div class="w-10 h-10 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">Google Gemini 3.1 Flash Lite Categorization</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            AI automatically analyzes documents (receipts, medical, legal briefs) and tags them into logical structures instantly.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-[#0f172a]/40 border border-slate-900 hover:border-slate-800 p-6 rounded-2xl transition-all duration-300 group">
+          <div class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">Direct Cloud Backup</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Backs up your high-resolution vector PDFs directly to organized folders inside your own Google Drive. No leaks.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-[#0f172a]/40 border border-slate-900 hover:border-slate-800 p-6 rounded-2xl transition-all duration-300 group">
+          <div class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">Smart Filename Suggestions</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Avoid generic 'SCAN_001.pdf' titles. Gemini reads contents to auto-generate logical, searchable names instantly.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-[#0f172a]/40 border border-slate-900 hover:border-slate-800 p-6 rounded-2xl transition-all duration-300 group">
+          <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold text-lg mb-2">Flexible Scans Token</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Earn daily Bonus Scans by engaging with sponsors, or pay once to secure absolute, unthrottled Vision AI access.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Simulator Section -->
+  <section id="scanner-simulator" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-[#0f172a]/60 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Left Side -->
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-semibold mb-4">
+            <svg class="w-3.5 h-3.5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            <span>Active Demonstration</span>
+          </div>
+          <h3 class="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight mb-3">
+            Simulate a Scan Instantly
+          </h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Pick a simulated physical document from the buttons below to see how our AI system OCRs contents, organizes folder destinations, and schedules Google Drive backups in real-time.
+          </p>
+
+          <div class="grid grid-cols-2 gap-3 mb-6">
+            <button onclick="selectDoc('receipt')" id="btn-receipt" class="doc-btn border-blue-500 bg-blue-600/10 text-white flex items-center gap-3 p-3 rounded-xl border text-left transition-all">
+              <span class="p-2 bg-blue-600 rounded-lg text-white">🧾</span>
+              <div>
+                <p class="text-xs font-semibold">Receipt</p>
+                <p class="text-[9px] text-slate-400 leading-none mt-0.5">Finance Category</p>
+              </div>
+            </button>
+            <button onclick="selectDoc('lease')" id="btn-lease" class="doc-btn border-slate-800 bg-slate-900/50 text-slate-400 flex items-center gap-3 p-3 rounded-xl border text-left transition-all">
+              <span class="p-2 bg-slate-800 rounded-lg text-slate-500">⚖️</span>
+              <div>
+                <p class="text-xs font-semibold">Lease Agreement</p>
+                <p class="text-[9px] text-slate-400 leading-none mt-0.5">Legal Category</p>
+              </div>
+            </button>
+            <button onclick="selectDoc('prescription')" id="btn-prescription" class="doc-btn border-slate-800 bg-slate-900/50 text-slate-400 flex items-center gap-3 p-3 rounded-xl border text-left transition-all">
+              <span class="p-2 bg-slate-800 rounded-lg text-slate-500">💊</span>
+              <div>
+                <p class="text-xs font-semibold">Prescription</p>
+                <p class="text-[9px] text-slate-400 leading-none mt-0.5">Health Category</p>
+              </div>
+            </button>
+            <button onclick="selectDoc('electricity')" id="btn-electricity" class="doc-btn border-slate-800 bg-slate-900/50 text-slate-400 flex items-center gap-3 p-3 rounded-xl border text-left transition-all">
+              <span class="p-2 bg-slate-800 rounded-lg text-slate-500">⚡</span>
+              <div>
+                <p class="text-xs font-semibold">Electricity Bill</p>
+                <p class="text-[9px] text-slate-400 leading-none mt-0.5">Utilities Category</p>
+              </div>
+            </button>
+          </div>
+
+          <!-- Dynamic simulator card status -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-500 uppercase font-mono block">Status Indicator</span>
+              <span id="simulator-log-status" class="text-xs text-slate-300 font-medium">Ready to parse document.</span>
+            </div>
+            <button onclick="runSimulation()" id="simulate-run-btn" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">
+              Start Simulation
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Side Phone Simulator -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-full max-w-[270px] aspect-[9/18] bg-slate-950 rounded-[40px] border-[5px] border-slate-800 shadow-2xl overflow-hidden relative">
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-slate-950 rounded-b-2xl z-20 flex items-center justify-center">
+              <div class="w-12 h-1 bg-slate-800 rounded-full"></div>
+            </div>
+
+            <!-- Screen UI -->
+            <div class="p-3 pt-8 h-full bg-[#080d1a] flex flex-col justify-between text-xs relative">
+              
+              <!-- State 1: Idle / Scanning -->
+              <div id="sim-state-idle" class="flex-grow flex flex-col justify-between h-full py-2">
+                <div class="bg-slate-950 rounded-xl p-3 border border-slate-800 font-mono text-[7px] leading-relaxed overflow-hidden relative min-h-[140px] flex flex-col justify-between">
+                  <div class="border-b border-slate-800/80 pb-1 text-[8px] text-slate-400 flex justify-between" id="sim-doc-header">
+                    <span>STARBUCKS_COFFEE.PNG</span>
+                    <span>June 30, 2026</span>
+                  </div>
+                  <p id="sim-doc-body" class="text-slate-500 my-2 whitespace-pre-wrap">
+                    STARBUCKS COFFEE #48291<br>1x Cafe Latte (Grande)   $4.95<br>1x Blueberry Scone        $3.50<br>TOTAL DUE                 $9.17
+                  </p>
+                  <div class="text-[8px] text-blue-400 text-right font-bold mt-1" id="sim-doc-footer">$9.17</div>
+
+                  <div id="sim-laser-sweeper" class="laser-line absolute left-0 right-0 h-0.5 bg-blue-500 shadow-md shadow-blue-400 hidden"></div>
+                </div>
+
+                <div class="text-center mt-3 flex-grow flex flex-col justify-center">
+                  <p class="text-[9px] text-slate-500 font-semibold tracking-wider">DOCUMENT DETECTED</p>
+                  <p class="text-xs text-white font-bold mt-0.5" id="sim-doc-detected-type">Receipt</p>
+                  <div class="w-10 h-10 bg-blue-600/10 border border-blue-500/30 rounded-full mx-auto mt-2 flex items-center justify-center text-blue-400 animate-pulse">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- State 2: Analyzing (Gemini processing) -->
+              <div id="sim-state-analyzing" class="flex-grow flex flex-col justify-center items-center py-4 text-center hidden">
+                <div class="relative w-12 h-12 mb-3 flex items-center justify-center">
+                  <div class="absolute inset-0 border-2 border-dashed border-emerald-500/40 rounded-full animate-spin"></div>
+                  <div class="w-8 h-8 bg-emerald-500/10 border border-emerald-500/40 rounded-full flex items-center justify-center text-emerald-400">
+                    <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                  </div>
+                </div>
+                <p class="text-[10px] font-bold text-emerald-400 tracking-wide uppercase">AI CLASSIFICATION</p>
+                <p class="text-[8px] text-slate-400 mt-1 max-w-[150px] leading-relaxed mx-auto">
+                  Gemini API is reading, renaming, and determining the optimal destination folder...
+                </p>
+                
+                <!-- Progress logs -->
+                <div class="w-full bg-slate-950 border border-slate-900 rounded-lg p-2 mt-3 text-left font-mono text-[7px] text-slate-500 space-y-1">
+                  <div class="flex items-center gap-1">
+                    <span class="text-emerald-500">✓</span>
+                    <span>OCR_TEXT_EXTRACTION (Success)</span>
+                  </div>
+                  <div class="flex items-center gap-1 text-slate-300">
+                    <span class="text-emerald-500 animate-pulse">●</span>
+                    <span>Gemini Vision parsing model...</span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <span class="opacity-40">○</span>
+                    <span>Inferring categories & smart naming</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- State 3: Uploading to Drive -->
+              <div id="sim-state-uploading" class="flex-grow flex flex-col justify-center items-center py-4 text-center hidden">
+                <div class="relative w-12 h-12 mb-3 flex items-center justify-center">
+                  <div class="absolute inset-0 border-2 border-indigo-500/20 rounded-full"></div>
+                  <div class="absolute inset-0 border-2 border-t-indigo-500 rounded-full animate-spin"></div>
+                  <div class="w-8 h-8 bg-indigo-500/10 border border-indigo-500/40 rounded-full flex items-center justify-center text-indigo-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                  </div>
+                </div>
+                <p class="text-[10px] font-bold text-indigo-400 tracking-wide uppercase font-mono">DRIVE SYNC ACTIVE</p>
+                <p class="text-[8px] text-slate-400 mt-1 max-w-[150px] leading-relaxed mx-auto">
+                  Uploading organized document safely to your secure Google Drive Storage...
+                </p>
+                
+                <div class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 mt-3 text-left">
+                  <div class="flex items-center gap-1.5 text-[7px] text-slate-300 font-mono mb-1">
+                    <svg class="w-2.5 h-2.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                    <span class="truncate" id="sim-uploading-folder">📁 NovaDocs/Finance/Receipts/</span>
+                  </div>
+                  <div class="w-full bg-slate-950 rounded-full h-1 overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-1 rounded-full animate-pulse" style="width: 70%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- State 4: Completed -->
+              <div id="sim-state-completed" class="flex-grow flex flex-col justify-between h-full py-2 hidden">
+                <div class="text-center pt-1">
+                  <div class="w-8 h-8 bg-emerald-500/15 border border-emerald-500/30 rounded-full mx-auto flex items-center justify-center text-emerald-400 mb-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <p class="text-[10px] font-bold text-white">Save Completed!</p>
+                  <p class="text-[8px] text-slate-500">Securely filed in your Cloud</p>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-2.5 my-1.5 space-y-2 text-left">
+                  <div>
+                    <span class="text-[7px] text-slate-500 font-semibold uppercase block">Category Tag</span>
+                    <div class="flex items-center justify-between mt-0.5">
+                      <span class="text-[8px] px-1.5 py-0.5 rounded border bg-emerald-500/10 text-emerald-400 border-emerald-500/30 font-mono" id="sim-completed-category">
+                        Finance
+                      </span>
+                      <span class="text-[7px] text-slate-500">Confidence: 99%</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span class="text-[7px] text-slate-500 font-semibold uppercase block">Smart Filename</span>
+                    <p class="text-[8.5px] font-mono text-blue-400 break-all mt-0.5 bg-slate-950 p-1 rounded border border-slate-800/80" id="sim-completed-filename">
+                      finance_receipt_starbucks_2026.pdf
+                    </p>
+                  </div>
+
+                  <div>
+                    <span class="text-[7px] text-slate-500 font-semibold uppercase block">Destination Folder</span>
+                    <p class="text-[8px] text-slate-300 font-medium truncate flex items-center gap-1 mt-0.5">
+                      <svg class="w-2.5 h-2.5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                      <span class="truncate" id="sim-completed-folder">📁 NovaDocs/Finance/Receipts/</span>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Action Button Link -->
+                <div class="bg-blue-600/10 border border-blue-500/20 rounded-lg p-1.5 flex items-center justify-between">
+                  <span class="text-[8px] text-blue-300 font-medium">Download full app</span>
+                  <svg class="w-2.5 h-2.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+
+              <!-- Navigation bar spacer -->
+              <div class="text-center text-[8px] text-slate-500 border-t border-slate-900/60 pt-2 flex justify-around">
+                <span class="text-blue-500 font-semibold">● Scan</span>
+                <span class="opacity-40">Folder</span>
+                <span class="opacity-40">Settings</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest block mb-2">Pricing Matrix</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
+          Flexible Scan Balance Model
+        </h2>
+        <p class="text-slate-400 text-sm mt-3">
+          Opt for immediate unrestricted Vision features, or earn extra uploads via non-disruptive sponsor segments.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
+        
+        <!-- Free card -->
+        <div class="bg-[#0f172a]/30 border border-slate-800 p-8 rounded-3xl flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-white">Ad-Supported Free</h3>
+                <p class="text-xs text-slate-500 mt-1">Excellent for general, casual scanning needs.</p>
+              </div>
+            </div>
+            <div class="text-3xl font-extrabold text-white font-display mb-6">$0</div>
+            <ul class="space-y-3.5 text-sm mb-8">
+              <li class="flex items-center gap-3"><span class="text-blue-500">✓</span> <span>3 Standard Daily Scans</span></li>
+              <li class="flex items-center gap-3"><span class="text-blue-500">✓</span> <span>Standard OCR parsing</span></li>
+              <li class="flex items-center gap-3"><span class="text-blue-500">✓</span> <span>Custom folders config</span></li>
+              <li class="flex items-center gap-3 text-blue-400 font-medium"><span class="text-blue-500">✓</span> <span>Watch ad units for Bonus Scans</span></li>
+            </ul>
+          </div>
+          <button onclick="playDemoAd()" class="w-full py-3 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 text-slate-300 rounded-2xl text-xs font-bold transition-all">
+            Simulate Watching Reward Ad
+          </button>
+        </div>
+
+        <!-- Pro card -->
+        <div class="bg-[#0f172a] border-2 border-blue-600 p-8 rounded-3xl flex flex-col justify-between relative shadow-lg shadow-blue-500/5">
+          <div class="absolute top-0 right-6 transform -translate-y-1/2 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full">
+            MOST SECURE
+          </div>
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-white">Vision AI Pro</h3>
+                <p class="text-xs text-slate-400 mt-1">Complete, unrestricted intelligent classification.</p>
+              </div>
+            </div>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-3xl font-extrabold text-white font-display">$7.99</span>
+              <span class="text-slate-400 text-xs uppercase tracking-wider ml-1">/ one-time payment</span>
+              <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider ml-2">Lifetime Access</span>
+            </div>
+            <ul class="space-y-3.5 text-sm mb-8">
+              <li class="flex items-center gap-3"><span class="text-emerald-500">✓</span> <span class="font-semibold text-white">Unlimited Scans</span></li>
+              <li class="flex items-center gap-3"><span class="text-emerald-500">✓</span> <span>Uncapped Gemini 3.1 Flash Lite classification</span></li>
+              <li class="flex items-center gap-3"><span class="text-emerald-500">✓</span> <span>Priority Drive scheduling</span></li>
+              <li class="flex items-center gap-3"><span class="text-emerald-500">✓</span> <span>Ad-Free experience</span></li>
+            </ul>
+          </div>
+          <a href="https://play.google.com/store/apps/details?id=com.cosmoscode.novadocsai" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-xs font-bold transition-all shadow-md shadow-blue-500/20">
+            Get App on Play Store
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Ad Player overlay -->
+  <div id="ad-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#0b0f19] border border-slate-800 rounded-2xl p-6 max-w-sm w-full">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-xs text-blue-400 font-bold uppercase tracking-wider">Reward Partner Ad</span>
+        <span id="ad-timer-label" class="text-xs text-slate-500 font-mono">Closing in 5s...</span>
+      </div>
+      <div class="bg-slate-950 aspect-video rounded-xl border border-slate-900 p-4 flex flex-col justify-between mb-4">
+        <div class="flex gap-2">
+          <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center font-bold text-[9px]">G</div>
+          <div>
+            <p class="text-[10px] font-bold text-white leading-none">Google Developers</p>
+            <p class="text-[8px] text-slate-500 mt-0.5">Build premium workflows using secure cloud resources.</p>
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-300 font-medium my-2">
+          Simplify Android cloud backup architectures securely with official platform SDKs.
+        </p>
+        <div class="text-[8px] text-slate-600">Sponsored Ad Space</div>
+      </div>
+      <button id="ad-modal-close" onclick="closeDemoAd()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold hidden">
+        Collect Scan Token & Dismiss
+      </button>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Section -->
+  <section id="privacy" class="py-20 border-t border-slate-900 bg-slate-950/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <div class="lg:col-span-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-semibold mb-4">
+            <span>🛡️ Play Store Compliant</span>
+          </div>
+          <h2 class="font-display text-3xl font-bold text-white tracking-tight">
+            Privacy Policy
+          </h2>
+          <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+            Essential documentation for Google OAuth safety audits and Google Play Store developer requirements. Link directly to this anchor during submission.
+          </p>
+          <button onclick="copyPrivacyToClipboard()" class="mt-6 flex items-center gap-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-semibold px-4 py-2.5 rounded-xl transition-all">
+            <span>📋 Copy Policy Text</span>
+          </button>
+        </div>
+
+        <div class="lg:col-span-8 w-full">
+          <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 h-[280px] overflow-y-auto font-sans text-xs text-slate-400 leading-relaxed space-y-4">
+            <h4 class="font-bold text-slate-200">Privacy Policy for NovaDocs AI</h4>
+            <p><strong>Effective Date: June 7, 2026</strong></p>
+            <p>NovaDocs AI ("we," "our," or "the App") is a productivity tool designed to help you scan, organize, and archive documents directly to your personal Google Drive. We value your privacy and are committed to being transparent about how your data is handled.</p>
+            <p><strong>The NovaDocs Privacy Promise:</strong> We do not own, store, or sell your documents. Your data belongs to you. We use industry-standard encryption and secure cloud-assisted intelligence to organize your files without compromising your privacy.</p>
+            <p><strong>1. Google Drive Integration (User-Controlled Storage)</strong><br>
+            NovaDocs AI uses the Google Drive REST API with the limited <code>drive.file</code> scope. This means:<br>
+            - Access Limitation: The app can only see, edit, and manage the specific files and folders that it creates (the "SmartArchive" folder). We cannot access your other personal documents or photos in your Google Drive.<br>
+            - No External Storage: Your scanned PDFs are transmitted directly from your device to your personal Google Drive. At no point are these files stored on our own external servers.</p>
+            
+            <p><strong>2. Cloud-Assisted Intelligence (Gemini 3.1 Flash Lite)</strong><br>
+            To provide automated document naming and categorization, NovaDocs AI utilizes Google Gemini 3.1 Flash Lite via secure Vertex AI for Firebase integration.<br>
+            - Ephemeral Processing: When you scan a document, the document's text or image data is transmitted to a secure Google Cloud environment for momentary analysis (inference).<br>
+            - No Data Retention: This data is processed in-memory and is not stored permanently on the cloud server. Once the classification is returned to the app, the document data is purged from the processing session.<br>
+            - Privacy Protections: Through our use of Vertex AI, Google does not use your document data to train its foundational AI models.</p>
+            
+            <p><strong>3. Advertising & Monetization (Google AdMob)</strong><br>
+            The free version of NovaDocs AI is supported by Google AdMob. To serve relevant advertisements, AdMob may collect certain data, including:<br>
+            - Device identifiers (such as the Android Advertising ID).<br>
+            - General location data (at the city or country level).<br>
+            - App performance and diagnostic data.<br>
+            Users who purchase the Pro Upgrade will have all advertisements removed and AdMob data collection disabled within the App.</p>
+            
+            <p><strong>4. Data Security & Encryption</strong><br>
+            All data transmitted between NovaDocs AI, Firebase, and Google Drive is encrypted in transit using industry-standard Transport Layer Security (TLS) protocols. We ensure that your document data is never sent over unencrypted channels.</p>
+            
+            <p><strong>5. Data Deletion & User Rights</strong><br>
+            - Document Deletion: You have full control over your data. To delete any document scanned by NovaDocs AI, simply delete it from your Google Drive.<br>
+            - Account Deletion: NovaDocs AI does not require you to create a proprietary account. We use Google Sign-In for authentication. Therefore, we do not store "user accounts" to delete. Removing the App's access via your Google Account security settings will terminate all connections.</p>
+            
+            <p><strong>6. Changes to This Policy</strong><br>
+            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the App description in the Google Play Store.</p>
+            
+            <p><strong>7. Contact Us</strong><br>
+            If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at:<br>
+            Email: <strong>supportatcosmoscode@gmail.com</strong></p>
+            
+            <p class="text-[10px] text-slate-500 border-t border-slate-800 pt-3 mt-3">
+              © 2026 Cosmos Code. All rights reserved.<br>
+              NovaDocs AI is a product of Cosmos Code.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Terms of Service Section -->
+  <section id="terms" class="py-20 border-t border-slate-900 bg-[#070a13]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <div class="lg:col-span-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-semibold mb-4">
+            <span>⚖️ User Agreement</span>
+          </div>
+          <h2 class="font-display text-3xl font-bold text-white tracking-tight">
+            Terms of Service
+          </h2>
+          <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+            By using NovaDocs AI, you agree to these legal terms. Essential for Google Play Store verification and one-time product compliance.
+          </p>
+        </div>
+
+        <div class="lg:col-span-8 w-full">
+          <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 h-[280px] overflow-y-auto font-sans text-xs text-slate-400 leading-relaxed space-y-4">
+            <h4 class="font-bold text-slate-200">Terms of Service for NovaDocs AI</h4>
+            <p><strong>Effective Date: June 7, 2026</strong></p>
+            <p>These Terms of Service ("Terms") govern your use of NovaDocs AI (the "App"), developed by Cosmos Code. By installing or using the App, you agree to be bound by these Terms.</p>
+            
+            <p><strong>1. Use of the Service</strong><br>
+            NovaDocs AI provides document scanning, OCR extraction, and cloud-archiving features. You are responsible for any documents you scan. You must not use the App for any illegal activities or to scan documents that violate the intellectual property or privacy rights of others.</p>
+            
+            <p><strong>2. Google Drive and Data Management</strong><br>
+            The App integrates with Google Drive to store your documents. All documents are stored in your personal Google storage. Cosmos Code does not own your content and has no access to your files beyond the files created by the App in the specific "SmartArchive" folder. You are responsible for managing your own Google storage limits.</p>
+            
+            <p><strong>3. In-App Purchases and Billing</strong><br>
+            NovaDocs AI offers a "Vision AI Pro" version available for a one-time purchase of $7.99 (or local equivalent).<br>
+            - All transactions are handled by the Google Play Store.<br>
+            - Refunds are subject to Google Play’s official refund policy.<br>
+            - Lifetime access is granted for the life of the App as provided on the Android platform.</p>
+            
+            <p><strong>4. Ad-Supported Rewards</strong><br>
+            Users of the free version may earn "Bonus Scans" by viewing advertisements provided by Google AdMob. Interacting with ads is optional. We are not responsible for the content of third-party advertisements served via AdMob.</p>
+            
+            <p><strong>5. Limitation of Liability</strong><br>
+            NovaDocs AI is provided on an "as-is" and "as-available" basis. Cosmos Code makes no warranties regarding the accuracy of OCR extraction or the 100% availability of Google Cloud services. In no event shall we be liable for any data loss resulting from device failure, Google Drive connectivity issues, or accidental deletion.</p>
+            
+            <p><strong>6. Termination</strong><br>
+            We reserve the right to modify or terminate the App’s features at any time. You may terminate your use of the service by uninstalling the App and revoking access via your Google Account security settings.</p>
+            
+            <p><strong>7. Governing Law</strong><br>
+            These Terms shall be governed by the laws applicable to international digital software distribution and the specific jurisdiction of the developer's registration.</p>
+            
+            <p><strong>8. Contact</strong><br>
+            For questions regarding these Terms, contact support at <strong>supportatcosmoscode@gmail.com</strong>.</p>
+            
+            <p class="text-[10px] text-slate-500 border-t border-slate-800 pt-3 mt-3">
+              Last Updated: June 7, 2026<br>
+              © 2026 Cosmos Code.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 border-t border-slate-900 bg-slate-950/40 relative">
+    <div class="max-w-md mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl font-black text-white tracking-tight">
+          Get in Touch
+        </h2>
+        <p class="text-slate-400 text-sm mt-2">
+          Have questions regarding our Google Drive OAuth authorization or API compliance? Connect with the development team directly.
+        </p>
+      </div>
+
+      <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 lg:p-8 shadow-xl text-center">
+        <div class="w-12 h-12 bg-blue-600/10 border border-blue-500/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-5">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+
+        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Official Developer Support</span>
+        <p class="text-xl font-bold font-mono text-white tracking-tight mb-4 select-all">
+          supportatcosmoscode@gmail.com
+        </p>
+
+        <div class="grid grid-cols-2 gap-3 mb-6">
+          <div class="bg-slate-950/40 border border-slate-800/80 p-3 rounded-xl text-left">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider block">Response Time</span>
+            <span class="text-xs font-bold text-white mt-0.5 block">Under 12 Hours</span>
+          </div>
+          <div class="bg-slate-950/40 border border-slate-800/80 p-3 rounded-xl text-left">
+            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider block">API Compliance</span>
+            <span class="text-xs font-bold text-blue-400 mt-0.5 block">100% Verified</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button
+            onclick="copyEmailAddress(this)"
+            class="flex-1 py-3 px-4 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="btn-text">Copy Email</span>
+          </button>
+
+          <a
+            href="mailto:supportatcosmoscode@gmail.com"
+            class="flex-1 py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Email Directly</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+        <div class="w-full md:w-2/3 text-left">
+          <h4 class="text-white text-xs font-bold uppercase tracking-widest mb-3">Privacy & Compliance</h4>
+          <p class="text-[10px] text-slate-500 leading-normal max-w-xl uppercase tracking-tighter">
+            NovaDocs AI is committed to your data security. We do not store scanned documents on our servers. All processing is transient, and files are transmitted directly to your secure Google Drive storage using OAuth2 encryption.
+          </p>
+        </div>
+        <div class="flex flex-col items-start md:items-end gap-2 shrink-0 text-left md:text-right">
+          <span class="text-xs text-slate-400 font-bold">supportatcosmoscode@gmail.com</span>
+          <div class="flex gap-4">
+            <span class="text-[10px] font-bold text-blue-500 uppercase cursor-pointer">GitHub</span>
+            <span class="text-[10px] font-bold text-blue-500 uppercase cursor-pointer">Twitter</span>
+            <span class="text-[10px] font-bold text-blue-500 uppercase cursor-pointer">LinkedIn</span>
+          </div>
+          <span class="text-[10px] text-slate-600">&copy; 2026 Cosmos Code. All rights reserved. <br> NovaDocs AI is a product of Cosmos Code.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JS Interactivity -->
+  <script>
+    // Mobile Navbar Menu toggle
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    }
+
+    // Document mock database
+    const mockData = {
+      receipt: {
+        title: "STARBUCKS_COFFEE.PNG",
+        text: "STARBUCKS COFFEE #48291<br>1x Cafe Latte (Grande)   $4.95<br>1x Blueberry Scone        $3.50<br>TOTAL DUE                 $9.17",
+        price: "$9.17",
+        name: "finance_receipt_starbucks_2026.pdf",
+        folder: "📁 NovaDocs/Finance/Receipts/",
+        category: "Finance"
+      },
+      lease: {
+        title: "LEASE_AGREEMENT.PNG",
+        text: "RESIDENTIAL LEASE AGREEMENT<br>Landlord: John Doe Properties<br>Tenant: Alex Smith<br>Rent: $1,850/mo<br>Deposit: $1,850",
+        price: "$1,850.00",
+        name: "legal_lease_agreement_123blue_2026.pdf",
+        folder: "📁 NovaDocs/Legal/Contracts/",
+        category: "Legal"
+      },
+      prescription: {
+        title: "MEDICAL_PRESCRIPTION.PNG",
+        text: "METRO HEALTH CLINIC<br>Dr. Sarah Jenkins, MD<br>Jane Doe - Rx Amoxicillin 500mg<br>Take 3x daily for 7 days",
+        price: "Rx Only",
+        name: "health_prescription_amoxicillin_2026.pdf",
+        folder: "📁 NovaDocs/Health/Medical/",
+        category: "Health"
+      },
+      electricity: {
+        title: "UTILITY_BILL_JUNE.PNG",
+        text: "METRO POWER & LIGHT<br>Usage Total: 1,180 kWh<br>CURRENT CHARGES DUE: $142.50<br>Due Date: July 15, 2026",
+        price: "$142.50",
+        name: "utility_electricity_bill_2026.pdf",
+        folder: "📁 NovaDocs/Utilities/Bills/",
+        category: "Utilities"
+      }
+    };
+
+    let activeDocKey = 'receipt';
+
+    function selectDoc(key) {
+      activeDocKey = key;
+      
+      // Update button highlights
+      document.querySelectorAll('.doc-btn').forEach(b => {
+        b.classList.remove('border-blue-500', 'bg-blue-600/10', 'text-white');
+        b.classList.add('border-slate-800', 'bg-slate-900/50', 'text-slate-400');
+        b.querySelector('span').classList.add('bg-slate-800', 'text-slate-500');
+        b.querySelector('span').classList.remove('bg-blue-600', 'text-white');
+      });
+
+      const selectedButton = document.getElementById('btn-' + key);
+      if (selectedButton) {
+        selectedButton.classList.add('border-blue-500', 'bg-blue-600/10', 'text-white');
+        selectedButton.classList.remove('border-slate-800', 'bg-slate-900/50', 'text-slate-400');
+        const badge = selectedButton.querySelector('span');
+        badge.classList.remove('bg-slate-800', 'text-slate-500');
+        badge.classList.add('bg-blue-600', 'text-white');
+      }
+
+      // Reset simulator screen to State 1
+      document.getElementById('sim-state-idle').classList.remove('hidden');
+      document.getElementById('sim-state-analyzing').classList.add('hidden');
+      document.getElementById('sim-state-uploading').classList.add('hidden');
+      document.getElementById('sim-state-completed').classList.add('hidden');
+
+      // Update State 1 content
+      document.getElementById('sim-doc-header').innerHTML = '<span>' + mockData[key].title + '</span><span>June 30, 2026</span>';
+      document.getElementById('sim-doc-body').innerHTML = mockData[key].text;
+      document.getElementById('sim-doc-footer').innerText = mockData[key].price;
+      document.getElementById('sim-doc-detected-type').innerText = mockData[key].category;
+
+      // Update metadata content for later states
+      document.getElementById('sim-uploading-folder').innerText = mockData[key].folder;
+      document.getElementById('sim-completed-filename').innerText = mockData[key].name;
+      document.getElementById('sim-completed-folder').innerText = mockData[key].folder;
+      
+      const categoryBadge = document.getElementById('sim-completed-category');
+      categoryBadge.innerText = mockData[key].category;
+      categoryBadge.className = "text-[8px] px-1.5 py-0.5 rounded border font-mono " + getCategoryColorClasses(mockData[key].category);
+
+      document.getElementById('simulator-log-status').innerText = "Document preloaded. Press 'Start Simulation' to analyze.";
+      
+      const laser = document.getElementById('sim-laser-sweeper');
+      laser.classList.add('hidden');
+
+      const btn = document.getElementById('simulate-run-btn');
+      btn.disabled = false;
+      btn.innerText = "Start Simulation";
+    }
+
+    function getCategoryColorClasses(category) {
+      switch (category) {
+        case 'Finance': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+        case 'Legal': return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+        case 'Health': return 'bg-rose-500/10 text-rose-400 border-rose-500/30';
+        case 'Utilities': return 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30';
+        default: return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+      }
+    }
+
+    function runSimulation() {
+      const laser = document.getElementById('sim-laser-sweeper');
+      const log = document.getElementById('simulator-log-status');
+      const btn = document.getElementById('simulate-run-btn');
+
+      btn.disabled = true;
+      btn.innerText = "Analyzing...";
+      
+      // Ensure we are back on State 1 to show scanning animation
+      document.getElementById('sim-state-idle').classList.remove('hidden');
+      document.getElementById('sim-state-analyzing').classList.add('hidden');
+      document.getElementById('sim-state-uploading').classList.add('hidden');
+      document.getElementById('sim-state-completed').classList.add('hidden');
+
+      laser.classList.remove('hidden');
+      log.innerText = "Scanning page & executing local OCR extraction...";
+
+      setTimeout(() => {
+        // Switch to State 2: Analyzing
+        document.getElementById('sim-state-idle').classList.add('hidden');
+        document.getElementById('sim-state-analyzing').classList.remove('hidden');
+        log.innerText = "Querying stateless Gemini 3.1 Flash Lite model for metadata structures...";
+
+        setTimeout(() => {
+          // Switch to State 3: Uploading
+          document.getElementById('sim-state-analyzing').classList.add('hidden');
+          document.getElementById('sim-state-uploading').classList.remove('hidden');
+          log.innerText = "Uploading finalized PDF directly to Google Drive folder...";
+
+          setTimeout(() => {
+            // Switch to State 4: Completed
+            document.getElementById('sim-state-uploading').classList.add('hidden');
+            document.getElementById('sim-state-completed').classList.remove('hidden');
+            
+            laser.classList.add('hidden');
+            log.innerText = "Success! Saved as " + mockData[activeDocKey].name;
+            btn.disabled = false;
+            btn.innerText = "Start Simulation";
+          }, 1800);
+        }, 2200);
+      }, 1800);
+    }
+
+    // Modern Toast Notification element creator
+    function showNotification(message, isSuccess = true) {
+      let container = document.getElementById('toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full px-4 sm:px-0';
+        document.body.appendChild(container);
+      }
+      
+      const toast = document.createElement('div');
+      toast.className = 'bg-slate-900 border border-slate-800 text-white text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center justify-between gap-3 transform translate-y-2 opacity-0 transition-all duration-300';
+      toast.innerHTML = '<div class="flex items-center gap-2"><span class="' + (isSuccess ? 'text-emerald-400 font-bold' : 'text-blue-400 font-bold') + '">' + (isSuccess ? '✓' : 'ℹ') + '</span><span>' + message + '</span></div>';
+      container.appendChild(toast);
+      
+      // Trigger CSS transition reflow
+      toast.offsetHeight;
+      toast.classList.remove('translate-y-2', 'opacity-0');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 3000);
+    }
+
+    // Ad Rewarder logic
+    let adInterval;
+    let timer = 5;
+
+    function playDemoAd() {
+      document.getElementById('ad-modal').classList.remove('hidden');
+      document.getElementById('ad-modal-close').classList.add('hidden');
+      document.getElementById('ad-timer-label').innerText = "Closing in 5s...";
+      
+      timer = 5;
+      adInterval = setInterval(() => {
+        timer--;
+        document.getElementById('ad-timer-label').innerText = "Closing in " + timer + "s...";
+        if (timer <= 0) {
+          clearInterval(adInterval);
+          document.getElementById('ad-timer-label').innerText = "Reward unlocked!";
+          document.getElementById('ad-modal-close').classList.remove('hidden');
+        }
+      }, 1000);
+    }
+
+    function closeDemoAd() {
+      clearInterval(adInterval);
+      document.getElementById('ad-modal').classList.add('hidden');
+      showNotification("Bonus Scan credited successfully! Playback finished.");
+    }
+
+    function copyPrivacyToClipboard() {
+      const copyText = "Privacy Policy for NovaDocs AI\n\nEffective Date: June 7, 2026\n\nNovaDocs AI is a productivity tool designed to help you scan, organize, and archive documents directly to your personal Google Drive. We value your privacy and are committed to being transparent about how your data is handled.\n\nThe NovaDocs Privacy Promise: We do not own, store, or sell your documents. Your data belongs to you. We use industry-standard encryption and secure cloud-assisted intelligence to organize your files without compromising your privacy.\n\nContact: supportatcosmoscode@gmail.com\n\n© 2026 Cosmos Code. All rights reserved.\nNovaDocs AI is a product of Cosmos Code.";
+      navigator.clipboard.writeText(copyText);
+      showNotification("Privacy Policy copied to clipboard!");
+    }
+
+    function copyEmailAddress(btn) {
+      navigator.clipboard.writeText("supportatcosmoscode@gmail.com");
+      const textSpan = btn.querySelector('.btn-text');
+      const originalText = textSpan.innerText;
+      textSpan.innerText = "Copied Address";
+      btn.classList.add('border-emerald-500/50', 'text-emerald-400');
+      setTimeout(() => {
+        textSpan.innerText = originalText;
+        btn.classList.remove('border-emerald-500/50', 'text-emerald-400');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
