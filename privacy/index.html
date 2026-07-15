@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - NovaDocs AI</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 40px; max-width: 850px; margin: auto; color: #333; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 30px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        .highlight { background-color: #f8f9fa; padding: 15px; border-left: 5px solid #2980b9; margin: 20px 0; }
+        footer { margin-top: 50px; font-size: 0.9em; color: #7f8c8d; border-top: 1px solid #eee; padding-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Privacy Policy for NovaDocs AI</h1>
+    <p><strong>Effective Date:</strong> June 7, 2026</p>
+
+    <p>NovaDocs AI ("we," "our," or "the App") is a productivity tool designed to help you scan, organize, and archive documents directly to your personal Google Drive. We value your privacy and are committed to being transparent about how your data is handled.</p>
+
+    <div class="highlight">
+        <strong>The NovaDocs Privacy Promise:</strong> 
+        We do not own, store, or sell your documents. Your data belongs to you. We use industry-standard encryption and secure cloud-assisted intelligence to organize your files without compromising your privacy.
+    </div>
+
+    <h2>1. Google Drive Integration (User-Controlled Storage)</h2>
+    <p>NovaDocs AI uses the <strong>Google Drive REST API</strong> with the limited <code>drive.file</code> scope. This means:</p>
+    <ul>
+        <li><strong>Access Limitation:</strong> The app can only see, edit, and manage the specific files and folders that <em>it</em> creates (the "SmartArchive" folder). We cannot access your other personal documents or photos in your Google Drive.</li>
+        <li><strong>No External Storage:</strong> Your scanned PDFs are transmitted directly from your device to your personal Google Drive. At no point are these files stored on our own external servers.</li>
+    </ul>
+
+    <h2>2. Cloud-Assisted Intelligence (Gemini 1.5 Flash)</h2>
+    <p>To provide automated document naming and categorization, NovaDocs AI utilizes <strong>Google Gemini 1.5 Flash</strong> via secure <strong>Vertex AI for Firebase</strong> integration.</p>
+    <ul>
+        <li><strong>Ephemeral Processing:</strong> When you scan a document, the document's text or image data is transmitted to a secure Google Cloud environment for momentary analysis (inference). </li>
+        <li><strong>No Data Retention:</strong> This data is processed in-memory and is <strong>not stored</strong> permanently on the cloud server. Once the classification is returned to the app, the document data is purged from the processing session.</li>
+        <li><strong>Privacy Protections:</strong> Through our use of Vertex AI, Google does <strong>not</strong> use your document data to train its foundational AI models.</li>
+    </ul>
+
+    <h2>3. Advertising & Monetization (Google AdMob)</h2>
+    <p>The free version of NovaDocs AI is supported by <strong>Google AdMob</strong>. To serve relevant advertisements, AdMob may collect certain data, including:</p>
+    <ul>
+        <li>Device identifiers (such as the Android Advertising ID).</li>
+        <li>General location data (at the city or country level).</li>
+        <li>App performance and diagnostic data.</li>
+    </ul>
+    <p>Users who purchase the <strong>Pro Upgrade</strong> will have all advertisements removed and AdMob data collection disabled within the App.</p>
+
+    <h2>4. Data Security & Encryption</h2>
+    <p>All data transmitted between NovaDocs AI, Firebase, and Google Drive is encrypted in transit using industry-standard <strong>Transport Layer Security (TLS)</strong> protocols. We ensure that your document data is never sent over unencrypted channels.</p>
+
+    <h2>5. Data Deletion & User Rights</h2>
+    <ul>
+        <li><strong>Document Deletion:</strong> You have full control over your data. To delete any document scanned by NovaDocs AI, simply delete it from your Google Drive.</li>
+        <li><strong>Account Deletion:</strong> NovaDocs AI does not require you to create a proprietary account. We use Google Sign-In for authentication. Therefore, we do not store "user accounts" to delete. Removing the App's access via your Google Account security settings will terminate all connections.</li>
+    </ul>
+
+    <h2>6. Changes to This Policy</h2>
+    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the App description in the Google Play Store.</p>
+
+    <h2>7. Contact Us</h2>
+    <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at:</p>
+    <p><strong>Email:</strong> supportatcosmoscode@gmail.com</p>
+
+    <footer>
+        &copy; 2026 Cosmos Code. All rights reserved.<br>
+        NovaDocs AI is a product of Cosmos Code.
+    </footer>
+</body>
+</html>
