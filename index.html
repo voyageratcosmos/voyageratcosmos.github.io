@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NovaDocs AI - Smart AI Document Scanning & Cloud Sync</title>
+  <title>NovaDocs AI - Turn Receipts into Real-Time Expense Insights</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,8 +65,9 @@
       <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-7 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
         <a href="#features" class="hover:text-white transition-colors">Features</a>
-        <a href="#scanner-simulator" class="hover:text-white transition-colors">Interactive Simulator</a>
-        <a href="#resilience" class="hover:text-white transition-colors">Architecture & Speed</a>
+        <a href="#intelligence-dashboard" class="text-blue-400 hover:text-white transition-colors">Expense Insights</a>
+        <a href="#scanner-simulator" class="hover:text-white transition-colors">Simulator</a>
+        <a href="#resilience" class="hover:text-white transition-colors">Architecture</a>
         <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
         <a href="#privacy" class="hover:text-white transition-colors">GDPR & Privacy</a>
         <a href="#contact" class="hover:text-white transition-colors">Contact</a>
@@ -74,9 +75,9 @@
 
       <div class="flex items-center gap-3">
         <a href="https://play.google.com/store/apps/details?id=com.cosmoscode.novadocsai" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-md shadow-blue-600/25">
-          Get on Play Store
+          Get App on Play Store
         </a>
-        <button id="mobile-menu-toggle" class="md:hidden p-2 text-slate-400 hover:text-white">
+        <button id="mobile-menu-toggle" onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-400 hover:text-white">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
         </button>
       </div>
@@ -84,12 +85,13 @@
 
     <!-- Mobile Drawer -->
     <div id="mobile-menu" class="hidden md:hidden bg-[#070a13] border-b border-slate-900 px-4 py-4 space-y-3">
-      <a href="#features" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Features</a>
-      <a href="#scanner-simulator" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Interactive Simulator</a>
-      <a href="#resilience" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Architecture & Speed</a>
-      <a href="#pricing" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Pricing</a>
-      <a href="#privacy" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">GDPR & Privacy Policy</a>
-      <a href="#contact" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Contact Support</a>
+      <a href="#features" onclick="toggleMobileMenu()" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Features</a>
+      <a href="#intelligence-dashboard" onclick="toggleMobileMenu()" class="block text-blue-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Expense Insights (New)</a>
+      <a href="#scanner-simulator" onclick="toggleMobileMenu()" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Interactive Simulator</a>
+      <a href="#resilience" onclick="toggleMobileMenu()" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Architecture & Speed</a>
+      <a href="#pricing" onclick="toggleMobileMenu()" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Pricing Options</a>
+      <a href="#privacy" onclick="toggleMobileMenu()" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">GDPR & Privacy Policy</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-400 hover:text-white text-xs uppercase tracking-widest py-1.5 font-bold">Contact Support</a>
       <a href="https://play.google.com/store/apps/details?id=com.cosmoscode.novadocsai" target="_blank" rel="noopener noreferrer" class="block text-center bg-blue-600 text-white font-bold text-xs py-2.5 rounded-xl">Get on Play Store</a>
     </div>
   </header>
@@ -107,11 +109,11 @@
           </div>
           
           <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
-            Scan Smarter. <br class="hidden sm:inline">Organize Instantly.
+            Smart AI Document <br class="hidden sm:inline">Scanning & <span class="text-blue-500 underline decoration-4 underline-offset-4">Cloud Sync</span>
           </h1>
           
           <p class="text-slate-400 text-base sm:text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-8">
-            The next generation of document management. Scan offline, reconstruct Word (.docx) layouts, and let AI categorize and sync your life directly to Google Drive.
+            The next generation of document & expense intelligence. Scan offline, reconstruct Word (.docx) layouts, transform receipts into instant monthly budgets, and sync directly to Google Drive.
           </p>
 
           <div id="download" class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
@@ -121,8 +123,8 @@
               </svg>
               <span>Download on Google Play</span>
             </a>
-            <a href="#scanner-simulator" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white px-8 py-4 rounded-2xl font-bold uppercase tracking-wider text-xs transition-all">
-              <span>Test Live Simulator</span>
+            <a href="#intelligence-dashboard" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-slate-800 hover:border-blue-500 text-blue-400 bg-slate-900/60 hover:text-white px-6 py-4 rounded-2xl font-bold uppercase tracking-wider text-xs transition-all">
+              <span>Explore Expense Insights</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
           </div>
@@ -131,7 +133,7 @@
           <div class="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-xs text-slate-400 border-t border-slate-900 pt-6 max-w-xl mx-auto lg:mx-0">
             <span class="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
               <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Fully GDPR / UMP Compliant</span>
+              <span>Expense Intelligence Built-in</span>
             </span>
             <span class="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
               <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -143,13 +145,25 @@
             </span>
             <span class="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]">
               <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-              <span>Isolated OAuth Scope</span>
+              <span>Multi-Currency (Rs / $ / € / £)</span>
             </span>
           </div>
         </div>
 
         <!-- Hero Showcase (Interactive SVG Device Representation) -->
-        <div class="lg:col-span-5 flex justify-center">
+        <div class="lg:col-span-5 flex justify-center relative">
+          
+          <!-- Tactical Floating TL;DR Summary Badge -->
+          <div class="absolute -top-4 -left-4 z-30 bg-slate-900/95 border border-blue-500/40 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-xl hidden sm:flex items-center gap-2.5 max-w-[240px]">
+            <div class="w-7 h-7 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0 text-xs">
+              ✨
+            </div>
+            <div class="text-[10px] leading-tight font-mono">
+              <span class="text-blue-400 font-bold uppercase block text-[8px]">TL;DR Smart Preview</span>
+              <span class="text-slate-300 font-semibold">Ronin Hardware: $1,120.00</span>
+            </div>
+          </div>
+
           <div class="relative w-full max-w-[280px] aspect-[9/18] bg-slate-950 rounded-[40px] border-[5px] border-slate-800 shadow-2xl overflow-hidden ring-1 ring-slate-700/50">
             <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-slate-950 rounded-b-2xl z-20 flex items-center justify-center">
               <div class="w-12 h-1 bg-slate-800 rounded-full mb-1"></div>
@@ -167,17 +181,20 @@
               <!-- Animated Scanner Graphic -->
               <div class="flex-1 bg-slate-950/80 rounded-2xl border border-slate-800/80 p-3 flex flex-col justify-between relative overflow-hidden">
                 <div class="border-b border-slate-800/80 pb-1.5 text-[8px] font-mono flex justify-between text-slate-500">
-                  <span>PRESCRIPTION_CLINIC_683.PDF</span>
-                  <span>99.2% Acc</span>
+                  <span>RONIN_INVOICE_AUG26.DOCX</span>
+                  <span class="text-emerald-400">99.2% Acc</span>
                 </div>
                 
                 <div class="my-auto py-2 text-center text-slate-400">
-                  <svg class="w-8 h-8 text-blue-500 mx-auto mb-2 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                  <p class="text-[9px] font-mono text-slate-300">Scanning & formatting...</p>
+                  <div class="p-2 rounded-lg bg-blue-600/10 border border-blue-500/20">
+                    <p class="text-[8px] font-bold text-blue-400 uppercase tracking-wider">TL;DR: Ronin Supplies</p>
+                    <p class="text-[10px] font-mono font-bold text-emerald-400 mt-0.5">$1,120.00 Parsed</p>
+                  </div>
                 </div>
 
-                <div class="text-[7px] font-mono text-blue-400/80 bg-blue-500/5 border border-blue-500/10 p-1.5 rounded">
-                  AI: health_prescription_amoxicillin_2026.docx
+                <div class="text-[7px] font-mono text-blue-400/80 bg-blue-500/5 border border-blue-500/10 p-1.5 rounded flex justify-between">
+                  <span>Category: <strong>Hardware</strong></span>
+                  <span class="text-emerald-400">USD $</span>
                 </div>
 
                 <!-- Sweeping laser line -->
@@ -185,9 +202,9 @@
               </div>
 
               <!-- Bottom sync status -->
-              <div class="mt-3 flex items-center justify-between text-[9px] text-slate-400 border-t border-slate-900 pt-2">
-                <span>Google Cloud Sync</span>
-                <span class="text-indigo-400 font-bold">100% Backed Up</span>
+              <div class="mt-3 flex items-center justify-between text-[9px] text-slate-400 border-t border-slate-900 pt-2 font-mono">
+                <span>Google Drive: /Finance/2026/</span>
+                <span class="text-indigo-400 font-bold">Synced</span>
               </div>
             </div>
           </div>
@@ -247,20 +264,20 @@
           </div>
         </div>
 
-        <!-- Feature 3: Smart Filename Suggestions -->
-        <div class="p-6 bg-slate-950/60 rounded-2xl border border-slate-800 flex flex-col justify-between transition-all duration-300 hover:border-blue-500/40 group">
+        <!-- Feature 3: Multi-Currency Financial Brain -->
+        <div class="p-6 bg-slate-950/60 rounded-2xl border border-blue-500/30 flex flex-col justify-between transition-all duration-300 hover:border-blue-500 group shadow-lg shadow-blue-500/5">
           <div>
             <div class="w-10 h-10 bg-emerald-600/20 border border-emerald-500/30 rounded-lg flex items-center justify-center mb-4 text-emerald-400 shrink-0 group-hover:scale-105 transition-all">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
-            <h3 class="text-white font-bold mb-2 text-base">Smart Filename Suggestions</h3>
+            <h3 class="text-white font-bold mb-2 text-base">Multi-Currency Financial Brain</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Unlock Real-Time Smart Naming when scanning online. Our AI analyzes your document as it's captured to suggest context-aware names (e.g., 'Amazon_Invoice_Aug12'). Note: Batch renaming for offline archives is coming in V1.20!
+              Our Global Expense Engine automatically detects currency symbols (Rs, $, €, £) and exchange values. Switch between monthly reports to see your spending in PKR or USD with a single tap. Perfect for global freelancers and business travelers.
             </p>
           </div>
           <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-emerald-400">
-            <span>Real-Time Context Naming</span>
-            <span class="text-slate-500">V1.20 Batch Coming</span>
+            <span>Rs / $ / € / £ Detection</span>
+            <span class="text-slate-500">Global Freelance Ready</span>
           </div>
         </div>
 
@@ -319,6 +336,291 @@
     </div>
   </section>
 
+  <!-- NEW: THE INTELLIGENCE DASHBOARD SECTION -->
+  <section id="intelligence-dashboard" class="py-20 bg-slate-950 border-b border-slate-800 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold uppercase tracking-widest rounded-full mb-3">
+          <span>✨ New: Monthly Expense Intelligence Engine</span>
+        </div>
+        
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+          Turn Receipts into <span class="text-blue-500 underline decoration-blue-500/50 decoration-4 underline-offset-4">Real-Time Insights</span>.
+        </h2>
+        
+        <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+          NovaDocs AI doesn't just scan; it understands your spending. Get automatic monthly expense reports with zero manual entry.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-5 text-[11px] font-mono text-slate-400">
+          <span class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1 rounded-full">
+            🛡️ <span>99.2% Data Accuracy</span>
+          </span>
+          <span class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1 rounded-full">
+            📈 <span>Instant AI Auditing</span>
+          </span>
+          <span class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1 rounded-full">
+            🔒 <span>100% Stateless & Private</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- PROBLEM VS SOLUTION CARD: "Stop Document Archaeology" -->
+      <div class="mb-14 bg-gradient-to-br from-slate-900/90 to-slate-950 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-6 border-b border-slate-800">
+          <div>
+            <span class="text-[10px] font-bold text-rose-400 uppercase tracking-widest block mb-1">
+              The Pain Point: The Death of Manual Bookkeeping
+            </span>
+            <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Expense tracking is <span class="text-amber-400 italic">"Document Archaeology."</span>
+            </h3>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
+              Stop hunting through chaotic folders for last month's totals. NovaDocs AI aggregates your financial data as you scan, so tax season is just a click away.
+            </p>
+          </div>
+          
+          <div class="flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 px-4 py-2 rounded-xl text-blue-300 text-xs font-bold shrink-0">
+            <span>⚡ Auto-Aggregated On Capture</span>
+          </div>
+        </div>
+
+        <!-- Visual Comparison: Generic Scan vs NovaDocs Expense Intelligence Card -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          
+          <!-- Generic Scan Card (Bad Way) -->
+          <div class="bg-slate-950 border border-rose-500/20 rounded-2xl p-5 relative opacity-85">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+              <div class="flex items-center gap-2 text-rose-400 font-bold">
+                <span>❌ Generic Scanner Apps</span>
+              </div>
+              <span class="font-mono text-[10px] text-slate-500">Scan_20260817_0941.pdf</span>
+            </div>
+
+            <div class="my-4 space-y-2.5">
+              <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl flex items-center gap-3">
+                <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-slate-500 font-mono text-xs">
+                  PDF
+                </div>
+                <div class="space-y-1">
+                  <p class="text-xs font-mono text-slate-400">Opaque Bitmapped Scan</p>
+                  <p class="text-[10px] text-slate-600">No merchant tag • No currency detected • No itemization</p>
+                </div>
+              </div>
+
+              <div class="space-y-1.5 text-[11px] text-slate-500">
+                <div class="flex items-center gap-2 text-rose-400/80">
+                  <span>❌</span>
+                  <span>Requires opening every PDF to see who and how much</span>
+                </div>
+                <div class="flex items-center gap-2 text-rose-400/80">
+                  <span>❌</span>
+                  <span>Manual spreadsheet typing required for taxes</span>
+                </div>
+                <div class="flex items-center gap-2 text-rose-400/80">
+                  <span>❌</span>
+                  <span>Lost in device storage without structured totals</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-900 text-[10px] font-mono text-slate-500 flex justify-between">
+              <span>Value: Basic Picture</span>
+              <span class="text-rose-400">Time Wasted: 4+ hrs / mo</span>
+            </div>
+          </div>
+
+          <!-- NovaDocs Expense Intelligence Card (The Smart Way) -->
+          <div class="bg-slate-950 border-2 border-blue-500/50 rounded-2xl p-5 relative shadow-lg shadow-blue-900/20">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
+              <div class="flex items-center gap-2 text-emerald-400 font-bold">
+                <span>✓ NovaDocs Expense Intelligence Card</span>
+              </div>
+              <span class="font-mono text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+                finance_ronin_supplies_aug2026.docx
+              </span>
+            </div>
+
+            <div class="my-4 space-y-3">
+              <!-- 1-Sentence TL;DR Summary Callout -->
+              <div class="bg-gradient-to-r from-blue-950/80 to-slate-900 border border-blue-500/30 p-3 rounded-xl">
+                <div class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1">
+                  ✨ AI TL;DR Smart Summary (No PDF Opening Needed)
+                </div>
+                <p class="text-xs font-mono text-white leading-relaxed">
+                  "Invoice from <strong class="text-blue-300">RONIN</strong> for supplies & ergonomic workstation — <strong class="text-emerald-400">$1,120.00</strong> (Tax Deductible: $112.00)"
+                </p>
+              </div>
+
+              <!-- Extracted Metadata Chips -->
+              <div class="grid grid-cols-3 gap-2 text-[10px] font-mono">
+                <div class="bg-slate-900 border border-slate-800 p-2 rounded-lg">
+                  <span class="text-slate-500 block text-[9px]">Merchant</span>
+                  <span class="text-white font-bold">Ronin Corp</span>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-2 rounded-lg">
+                  <span class="text-slate-500 block text-[9px]">Category</span>
+                  <span class="text-indigo-400 font-bold">Hardware</span>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-2 rounded-lg">
+                  <span class="text-slate-500 block text-[9px]">Auto-Drive Path</span>
+                  <span class="text-emerald-400 font-bold">/Finance/2026/</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-900 text-[10px] font-mono text-slate-400 flex justify-between items-center">
+              <span class="text-emerald-400 font-bold">✓ 1-Click Tax Export Ready</span>
+              <span class="text-blue-400 font-bold">Instant Reconciliation</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- THE BENTO BOX: INTERACTIVE MONTHLY EXPENSE DASHBOARD -->
+      <div class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 lg:p-10 shadow-2xl relative">
+        
+        <!-- Top Bar: Controls & Multi-Currency Chips -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-800">
+          <div>
+            <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest block">
+              Live Interactive Intelligence Testbed
+            </span>
+            <h3 class="text-2xl font-bold text-white tracking-tight">
+              Monthly Expense Intelligence Dashboard
+            </h3>
+          </div>
+
+          <!-- Currency Switcher Chips -->
+          <div class="flex items-center gap-2 bg-slate-950 border border-slate-800 p-1.5 rounded-2xl shrink-0 font-mono text-xs font-bold">
+            <span class="text-slate-500 text-[10px] px-2 uppercase">Currency:</span>
+            <button onclick="setDashboardCurrency('USD')" id="btn-curr-usd" class="px-3 py-1.5 rounded-xl bg-blue-600 text-white shadow-md cursor-pointer transition-all">USD</button>
+            <button onclick="setDashboardCurrency('PKR')" id="btn-curr-pkr" class="px-3 py-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 cursor-pointer transition-all">PKR</button>
+            <button onclick="setDashboardCurrency('EUR')" id="btn-curr-eur" class="px-3 py-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 cursor-pointer transition-all">EUR</button>
+            <button onclick="setDashboardCurrency('GBP')" id="btn-curr-gbp" class="px-3 py-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 cursor-pointer transition-all">GBP</button>
+          </div>
+        </div>
+
+        <!-- Bento Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          <!-- Card 1: Large Current Month Total (Bento Left) -->
+          <div class="lg:col-span-5 bg-slate-950 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between relative overflow-hidden">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 bg-blue-600/20 border border-blue-500/30 rounded-lg flex items-center justify-center text-blue-400 font-bold">
+                    $
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">August 2026</span>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wide">Current Month Total</h4>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+                  +14.2% vs Jul
+                </span>
+              </div>
+
+              <!-- Massive Total Display -->
+              <div class="my-6">
+                <div id="dash-main-total" class="text-4xl sm:text-5xl font-black font-display text-white tracking-tight">
+                  $3,428.50
+                </div>
+                <p class="text-xs text-slate-400 mt-2 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Auto-extracted from <strong>42 receipts & invoices</strong></span>
+                </p>
+              </div>
+
+              <!-- Metric Split -->
+              <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-800/80">
+                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/60">
+                  <span class="text-[9px] font-mono text-slate-400 uppercase block">Tax Deductible</span>
+                  <span id="dash-tax-total" class="text-sm font-bold text-emerald-400 font-mono mt-0.5 block">$2,570.00</span>
+                  <span class="text-[9px] text-slate-500">75% of total spend</span>
+                </div>
+                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800/60">
+                  <span class="text-[9px] font-mono text-slate-400 uppercase block">Audit Status</span>
+                  <span class="text-sm font-bold text-blue-400 font-mono mt-0.5 block">Reconciled</span>
+                  <span class="text-[9px] text-slate-500">99.2% OCR Confirmed</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Feature Pill -->
+            <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 font-mono">
+              <span class="text-[10px] text-blue-400">🌐 Multi-Currency Engine</span>
+              <span class="text-[10px] text-slate-500">Zero Manual Entry</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Top Merchants Horizontal Bar Chart (Bento Right) -->
+          <div class="lg:col-span-7 bg-slate-950 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-800">
+                <div>
+                  <h4 class="text-xs font-bold text-white uppercase tracking-wider">Top Merchants & Spending Distribution</h4>
+                  <p class="text-[10px] text-slate-400">Click any merchant to view its 1-sentence AI TL;DR summary</p>
+                </div>
+                <span class="text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+                  Top 5 Breakdown
+                </span>
+              </div>
+
+              <!-- Horizontal Bar Chart -->
+              <div class="space-y-3.5" id="dash-merchants-list">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Dynamic TL;DR Preview for selected merchant -->
+            <div class="mt-5 p-3.5 bg-gradient-to-r from-blue-950/40 to-slate-900 border border-blue-500/20 rounded-xl">
+              <div class="flex items-center justify-between text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1">
+                <span id="dash-preview-title">✨ AI TL;DR Preview: Ronin Workspace</span>
+                <span id="dash-preview-amount" class="text-emerald-400 font-mono">$1,120.00</span>
+              </div>
+              <p id="dash-preview-text" class="text-xs text-slate-300 font-mono leading-relaxed">
+                "Invoice from RONIN for supplies & ergonomic workstation — $1,120.00"
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Bottom Trust & Feature Narrative Callout -->
+        <div class="mt-8 pt-6 border-t border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/60">
+            <h5 class="font-bold text-white text-[11px] uppercase tracking-wider">🌐 Multi-Currency Financial Brain</h5>
+            <p class="text-slate-400 text-[10px] mt-0.5 leading-relaxed">
+              Detects Rs, $, €, £ automatically. Switch between monthly reports in PKR or USD with a single tap.
+            </p>
+          </div>
+
+          <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/60">
+            <h5 class="font-bold text-white text-[11px] uppercase tracking-wider">📄 1-Sentence TL;DR Summaries</h5>
+            <p class="text-slate-400 text-[10px] mt-0.5 leading-relaxed">
+              Never open a PDF again just to see what's inside. Live preview shows merchant & totals right in your document list.
+            </p>
+          </div>
+
+          <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/60">
+            <h5 class="font-bold text-white text-[11px] uppercase tracking-wider">🔒 100% Stateless Security</h5>
+            <p class="text-slate-400 text-[10px] mt-0.5 leading-relaxed">
+              All financial parsing is transient. Your accounting numbers are never permanently stored on external servers.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
   <!-- Interactive Simulator Section -->
   <section id="scanner-simulator" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="bg-[#0f172a]/60 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
@@ -327,8 +629,7 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-8">
         <div>
           <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-bold uppercase tracking-wider mb-2">
-            <svg class="w-3.5 h-3.5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-            <span>Live Interactive Testbed</span>
+            <span>⚡ Live Interactive Testbed</span>
           </div>
           <h3 class="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
             NovaDocs Engine Simulator
@@ -379,225 +680,116 @@
             <button onclick="selectDoc('electricity')" id="btn-electricity" class="doc-btn border-slate-800 bg-slate-900/50 text-slate-400 flex items-center gap-3 p-3 rounded-xl border text-left transition-all">
               <span class="p-2 bg-slate-800 rounded-lg text-slate-500">⚡</span>
               <div>
-                <p class="text-xs font-semibold">Electricity Bill</p>
-                <p class="text-[9px] text-slate-400 leading-none mt-0.5">Utilities Category</p>
+                <p class="text-xs font-semibold">Utility Bill</p>
+                <p class="text-[9px] text-slate-400 leading-none mt-0.5">Bills Category</p>
               </div>
             </button>
           </div>
 
-          <!-- Dynamic simulator card status -->
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between">
-            <div>
-              <span class="text-[10px] text-slate-500 uppercase font-mono block">Engine Status</span>
-              <span id="simulator-log-status" class="text-xs text-slate-300 font-medium">Ready to parse document.</span>
-            </div>
-            <button onclick="runSimulation()" id="simulate-run-btn" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all">
-              Start Scan
-            </button>
+          <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-6 font-mono text-xs">
+            <div class="text-slate-500 text-[10px] uppercase font-bold mb-2">Simulation Log Output:</div>
+            <p id="simulator-log-status" class="text-blue-400">Ready. Click 'Start Scan' to trigger Gemini inference pipeline.</p>
           </div>
+
+          <button id="simulate-run-btn" onclick="runSimulation()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/20 text-xs uppercase tracking-wider cursor-pointer">
+            Start Scan
+          </button>
         </div>
 
-        <!-- Right Side Phone Simulator -->
+        <!-- Right Side Phone Display Mock -->
         <div class="lg:col-span-5 flex justify-center">
-          <div class="w-full max-w-[270px] aspect-[9/18] bg-slate-950 rounded-[40px] border-[5px] border-slate-800 shadow-2xl overflow-hidden relative">
-            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-slate-950 rounded-b-2xl z-20 flex items-center justify-center">
-              <div class="w-12 h-1 bg-slate-800 rounded-full"></div>
-            </div>
-
-            <!-- Screen UI -->
-            <div class="p-3 pt-8 h-full bg-[#080d1a] flex flex-col justify-between text-xs relative">
+          <div class="w-full max-w-[270px] bg-slate-950 rounded-[36px] border-4 border-slate-800 p-4 shadow-2xl relative overflow-hidden">
+            <div class="w-12 h-1 bg-slate-800 rounded-full mx-auto mb-4"></div>
+            
+            <div class="bg-slate-900 rounded-2xl p-3 border border-slate-800 space-y-3 min-h-[300px] flex flex-col justify-between relative overflow-hidden">
               
-              <!-- State 1: Idle / Scanning -->
-              <div id="sim-state-idle" class="flex-grow flex flex-col justify-between h-full py-2">
-                <div class="bg-slate-950 rounded-xl p-3 border border-slate-800 font-mono text-[7px] leading-relaxed overflow-hidden relative min-h-[140px] flex flex-col justify-between">
-                  <div class="border-b border-slate-800/80 pb-1 text-[8px] text-slate-400 flex justify-between" id="sim-doc-header">
-                    <span>STARBUCKS_COFFEE.PNG</span>
-                    <span>June 30, 2026</span>
-                  </div>
-                  <p id="sim-doc-body" class="text-slate-500 my-2 whitespace-pre-wrap">
-                    STARBUCKS COFFEE #48291<br>1x Cafe Latte (Grande)   $4.95<br>1x Blueberry Scone        $3.50<br>TOTAL DUE                 $9.17
-                  </p>
-                  <div class="text-[8px] text-blue-400 text-right font-bold mt-1" id="sim-doc-footer">$9.17</div>
-
-                  <div id="sim-laser-sweeper" class="laser-line absolute left-0 right-0 h-0.5 bg-blue-500 shadow-md shadow-blue-400 hidden"></div>
+              <!-- State 1: Ready / Scanning -->
+              <div id="sim-state-idle">
+                <div class="text-[9px] font-mono text-slate-400 flex justify-between border-b border-slate-800 pb-1.5 mb-2">
+                  <span id="sim-disp-doc-title">RECEIPT_SCAN.PDF</span>
+                  <span class="text-emerald-400">99.2% Acc</span>
                 </div>
-
-                <div class="text-center mt-3 flex-grow flex flex-col justify-center">
-                  <p class="text-[9px] text-slate-500 font-semibold tracking-wider">DOCUMENT DETECTED</p>
-                  <p class="text-xs text-white font-bold mt-0.5" id="sim-doc-detected-type">Receipt</p>
-                  <div class="w-10 h-10 bg-blue-600/10 border border-blue-500/30 rounded-full mx-auto mt-2 flex items-center justify-center text-blue-400 animate-pulse">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                  </div>
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/80 font-mono text-[10px] space-y-1.5 text-slate-400">
+                  <p id="sim-disp-doc-text-1" class="text-white font-bold">RONIN WORKSPACE</p>
+                  <p id="sim-disp-doc-text-2">Supplies & Hardware: $1,120.00</p>
+                  <p id="sim-disp-doc-text-3" class="text-slate-500">Date: Aug 17, 2026</p>
                 </div>
               </div>
 
-              <!-- State 2: Analyzing (Gemini processing) -->
-              <div id="sim-state-analyzing" class="flex-grow flex flex-col justify-center items-center py-4 text-center hidden">
-                <div class="relative w-12 h-12 mb-3 flex items-center justify-center">
-                  <div class="absolute inset-0 border-2 border-dashed border-emerald-500/40 rounded-full animate-spin"></div>
-                  <div class="w-8 h-8 bg-emerald-500/10 border border-emerald-500/40 rounded-full flex items-center justify-center text-emerald-400">
-                    <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                  </div>
-                </div>
-                <p class="text-[10px] font-bold text-emerald-400 tracking-wide uppercase">AI CLASSIFICATION & WORD RECONSTRUCTION</p>
-                <p class="text-[8px] text-slate-400 mt-1 max-w-[150px] leading-relaxed mx-auto">
-                  Gemini API is reading, categorizing, and formatting .docx structure...
-                </p>
-                
-                <!-- Progress logs -->
-                <div class="w-full bg-slate-950 border border-slate-900 rounded-lg p-2 mt-3 text-left font-mono text-[7px] text-slate-500 space-y-1">
-                  <div class="flex items-center gap-1">
-                    <span class="text-emerald-500">✓</span>
-                    <span>OCR_ACCURACY_99.2% (Success)</span>
-                  </div>
-                  <div class="flex items-center gap-1 text-slate-300">
-                    <span class="text-emerald-500 animate-pulse">●</span>
-                    <span>Typography & Layout parser</span>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <span class="opacity-40">○</span>
-                    <span>Inferring context smart naming</span>
-                  </div>
-                </div>
+              <!-- State 2: Analyzing -->
+              <div id="sim-state-analyzing" class="hidden text-center my-auto py-6">
+                <div class="w-10 h-10 rounded-full border-2 border-blue-500 border-t-transparent animate-spin mx-auto mb-3"></div>
+                <p class="text-xs font-bold text-white">Gemini Multimodal Analysis...</p>
+                <p class="text-[10px] text-blue-400 mt-1">Extracting taxonomy & Word typography</p>
               </div>
 
-              <!-- State 3: Uploading to Drive -->
-              <div id="sim-state-uploading" class="flex-grow flex flex-col justify-center items-center py-4 text-center hidden">
-                <div class="relative w-12 h-12 mb-3 flex items-center justify-center">
-                  <div class="absolute inset-0 border-2 border-indigo-500/20 rounded-full"></div>
-                  <div class="absolute inset-0 border-2 border-t-indigo-500 rounded-full animate-spin"></div>
-                  <div class="w-8 h-8 bg-indigo-500/10 border border-indigo-500/40 rounded-full flex items-center justify-center text-indigo-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                  </div>
-                </div>
-                <p class="text-[10px] font-bold text-indigo-400 tracking-wide uppercase font-mono">PARALLEL DRIVE SYNC</p>
-                <p class="text-[8px] text-slate-400 mt-1 max-w-[150px] leading-relaxed mx-auto">
-                  Uploading organized document directly to your Google Drive...
-                </p>
-                
-                <div class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 mt-3 text-left">
-                  <div class="flex items-center gap-1.5 text-[7px] text-slate-300 font-mono mb-1">
-                    <svg class="w-2.5 h-2.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-                    <span class="truncate" id="sim-uploading-folder">📁 NovaDocs/Finance/Receipts/</span>
-                  </div>
-                  <div class="w-full bg-slate-950 rounded-full h-1 overflow-hidden">
-                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-1 rounded-full animate-pulse" style="width: 80%"></div>
-                  </div>
+              <!-- State 3: Uploading -->
+              <div id="sim-state-uploading" class="hidden text-center my-auto py-6">
+                <p class="text-xs font-bold text-indigo-300">Syncing to Google Drive</p>
+                <div class="w-full bg-slate-950 rounded-full h-1.5 mt-3 overflow-hidden">
+                  <div class="bg-indigo-500 h-full rounded-full animate-pulse" style="width: 80%"></div>
                 </div>
               </div>
 
               <!-- State 4: Completed -->
-              <div id="sim-state-completed" class="flex-grow flex flex-col justify-between h-full py-2 hidden">
-                <div class="text-center pt-1">
-                  <div class="w-8 h-8 bg-emerald-500/15 border border-emerald-500/30 rounded-full mx-auto flex items-center justify-center text-emerald-400 mb-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  </div>
-                  <p class="text-[10px] font-bold text-white">Save Completed!</p>
-                  <p class="text-[8px] text-slate-500">Filed to Drive & Word (.docx) ready</p>
-                </div>
-
-                <!-- Summary Card -->
-                <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-2.5 my-1.5 space-y-2 text-left">
-                  <div>
-                    <span class="text-[7px] text-slate-500 font-semibold uppercase block">Category Tag</span>
-                    <div class="flex items-center justify-between mt-0.5">
-                      <span class="text-[8px] px-1.5 py-0.5 rounded border bg-emerald-500/10 text-emerald-400 border-emerald-500/30 font-mono" id="sim-completed-category">
-                        Finance
-                      </span>
-                      <span class="text-[7px] text-slate-500">Confidence: 99.2%</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="text-[7px] text-slate-500 font-semibold uppercase block">Smart Filename</span>
-                    <p class="text-[8.5px] font-mono text-blue-400 break-all mt-0.5 bg-slate-950 p-1 rounded border border-slate-800/80" id="sim-completed-filename">
-                      finance_receipt_starbucks_2026.pdf
-                    </p>
-                  </div>
-
-                  <div>
-                    <span class="text-[7px] text-slate-500 font-semibold uppercase block">Destination Folder</span>
-                    <p class="text-[8px] text-slate-300 font-medium truncate flex items-center gap-1 mt-0.5">
-                      <svg class="w-2.5 h-2.5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-                      <span class="truncate" id="sim-completed-folder">📁 NovaDocs/Finance/Receipts/</span>
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Action Button Link -->
-                <div class="bg-blue-600/10 border border-blue-500/20 rounded-lg p-1.5 flex items-center justify-between">
-                  <span class="text-[8px] text-blue-300 font-medium">Export .docx & PDF</span>
-                  <svg class="w-2.5 h-2.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              <div id="sim-state-completed" class="hidden space-y-2">
+                <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono">
+                  <p class="font-bold">✓ Processed & Uploaded</p>
+                  <p class="text-[9px] text-slate-300 mt-1" id="sim-res-filename">finance_ronin_hardware_aug2026.docx</p>
+                  <p class="text-[9px] text-slate-400" id="sim-res-folder">Drive Folder: /Finance/Receipts/</p>
                 </div>
               </div>
 
-              <!-- Navigation bar spacer -->
-              <div class="text-center text-[8px] text-slate-500 border-t border-slate-900/60 pt-2 flex justify-around">
-                <span class="text-blue-500 font-semibold">● Scan</span>
-                <span class="opacity-40">Folders</span>
-                <span class="opacity-40">Settings</span>
+              <!-- Laser Bar inside phone -->
+              <div id="sim-laser-sweeper" class="laser-line absolute left-0 right-0 h-0.5 bg-blue-500 shadow-md shadow-blue-500 hidden"></div>
+
+              <!-- Bottom Bar inside phone -->
+              <div class="border-t border-slate-800 pt-2 flex justify-between text-[8px] font-mono text-slate-500">
+                <span>Google OAuth Isolated</span>
+                <span class="text-blue-400">100% Stateless</span>
               </div>
+
             </div>
           </div>
         </div>
       </div>
 
       <!-- BATCH SYNC VIEW -->
-      <div id="sim-view-batch" class="hidden">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          <div class="lg:col-span-6 space-y-4">
-            <div class="bg-indigo-950/30 border border-indigo-500/20 p-4 rounded-2xl">
-              <h4 class="text-white font-bold text-sm mb-1 flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
-                Offline-First Batch AI Architecture
-              </h4>
-              <p class="text-xs text-slate-400 leading-relaxed">
-                When you scan on the go without an internet connection, NovaDocs caches documents securely. Once online and signed in, the <strong>Batch AI Engine</strong> parallelizes OCR, categorization, and Drive folder sorting.
-              </p>
+      <div id="sim-view-batch" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- Left Side: Queue list -->
+        <div class="lg:col-span-7">
+          <p class="text-slate-400 text-sm leading-relaxed mb-6">
+            Test the <strong>Batch AI Engine</strong>. Simulate scanning multiple files while offline in airplane mode. When network returns, watch parallel workers file everything simultaneously into separate Drive folders.
+          </p>
+
+          <div class="space-y-2.5 mb-6 font-mono text-xs">
+            <div id="batch-item-1" class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <span>📄 offline_scan_01.pdf</span>
+              <span class="text-amber-400 text-[10px]">Pending (Receipt)</span>
             </div>
-
-            <!-- Offline Queue Box -->
-            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4">
-              <div class="flex items-center justify-between text-xs mb-3 pb-2 border-b border-slate-800">
-                <span class="font-bold text-slate-300">Pending Offline Archive</span>
-                <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">3 Items Queued</span>
-              </div>
-              
-              <div class="space-y-2 text-xs font-mono">
-                <div class="flex items-center justify-between p-2 rounded bg-slate-950/70 border border-slate-800/60 text-slate-400" id="batch-item-1">
-                  <span>📄 offline_scan_01.pdf (Invoice)</span>
-                  <span class="text-[10px] text-indigo-400">→ /Finance/</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-slate-950/70 border border-slate-800/60 text-slate-400" id="batch-item-2">
-                  <span>📄 offline_scan_02.pdf (Agreement)</span>
-                  <span class="text-[10px] text-amber-400">→ /Legal/</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-slate-950/70 border border-slate-800/60 text-slate-400" id="batch-item-3">
-                  <span>📄 offline_scan_03.pdf (Rx Clinic)</span>
-                  <span class="text-[10px] text-rose-400">→ /Health/</span>
-                </div>
-              </div>
-
-              <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <p class="text-[10px] text-slate-500 italic">
-                  *Real-time smart naming applies on capture. Batch auto-renaming coming in V1.20!
-                </p>
-                <button onclick="runBatchSimulation()" id="btn-run-batch" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-indigo-600/30 whitespace-nowrap">
-                  Run Batch AI Sync
-                </button>
-              </div>
+            <div id="batch-item-2" class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <span>📄 offline_scan_02.pdf</span>
+              <span class="text-amber-400 text-[10px]">Pending (Contract)</span>
+            </div>
+            <div id="batch-item-3" class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <span>📄 offline_scan_03.pdf</span>
+              <span class="text-amber-400 text-[10px]">Pending (Prescription)</span>
             </div>
           </div>
 
-          <!-- Batch Output Drive Hierarchy Display -->
-          <div class="lg:col-span-6 bg-slate-950/90 border border-slate-800 rounded-2xl p-6 font-mono text-xs text-slate-300">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-[10px] text-slate-500">
-              <span class="flex items-center gap-1.5 text-blue-400 font-bold">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-                Google Drive: SmartArchive/
+          <button id="btn-run-batch" onclick="runBatchSimulation()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-600/20 text-xs uppercase tracking-wider cursor-pointer">
+            Run Batch AI Sync
+          </button>
+        </div>
+
+        <!-- Right Side: Live Drive Directory Simulation -->
+        <div class="lg:col-span-5">
+          <div class="bg-slate-950 rounded-2xl border border-slate-800 p-5 space-y-4">
+            <div class="flex items-center justify-between text-xs pb-2 border-b border-slate-800">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>📁 Google Drive Hierarchy</span>
               </span>
-              <span id="batch-status-tag" class="text-slate-400">Ready for sync</span>
+              <span id="batch-status-tag" class="text-slate-400 text-[10px]">Ready for sync</span>
             </div>
 
             <div class="space-y-3 font-mono text-[11px]" id="batch-drive-tree">
@@ -619,7 +811,6 @@
               Click 'Run Batch AI Sync' to simulate multi-threaded upload and automatic categorization.
             </div>
           </div>
-
         </div>
       </div>
 
@@ -660,8 +851,8 @@
         <!-- Resilience 2 -->
         <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center mb-4">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7z"/></svg>
+            <div class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center mb-4 text-emerald-400 font-bold">
+              📁
             </div>
             <h3 class="text-white font-bold text-base mb-2">Adaptive Storage Tiers</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
@@ -676,8 +867,8 @@
         <!-- Resilience 3 -->
         <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center mb-4">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <div class="w-10 h-10 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center mb-4 text-amber-400 font-bold">
+              ⚡
             </div>
             <h3 class="text-white font-bold text-base mb-2">Circuit-Breaker Fail-Safe</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
@@ -692,8 +883,8 @@
         <!-- Resilience 4 -->
         <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-xl flex items-center justify-center mb-4">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            <div class="w-10 h-10 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-xl flex items-center justify-center mb-4 text-purple-400 font-bold">
+              🛡️
             </div>
             <h3 class="text-white font-bold text-base mb-2">GDPR & Privacy Guarantee</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
@@ -719,7 +910,7 @@
           Flexible Scan Balance Model
         </h2>
         <p class="text-slate-400 text-sm mt-3">
-          Opt for immediate unrestricted Vision features, or earn extra uploads via non-disruptive sponsor segments.
+          Opt for immediate unrestricted Vision & Expense features, or earn extra uploads via non-disruptive sponsor segments.
         </p>
       </div>
 
@@ -751,33 +942,33 @@
         <!-- Pro card -->
         <div class="bg-[#0f172a] border-2 border-blue-600 p-8 rounded-3xl flex flex-col justify-between relative shadow-lg shadow-blue-500/10">
           <div class="absolute top-0 right-6 transform -translate-y-1/2 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-            V1.14 UNLIMITED PRO
+            RECOMMENDED • LIFETIME
           </div>
           <div>
             <div class="flex justify-between items-start mb-4">
               <div>
-                <h3 class="text-xl font-bold text-white">Vision AI Pro</h3>
-                <p class="text-xs text-slate-400 mt-1">Complete, unrestricted intelligent classification.</p>
+                <h3 class="text-xl font-bold text-white">Expense & Vision Pro Tier</h3>
+                <p class="text-xs text-slate-400 mt-1">Uncapped document processing with Monthly Expense Intelligence.</p>
               </div>
             </div>
             <div class="flex items-baseline gap-1 mb-6">
               <span class="text-3xl font-extrabold text-white font-display">$7.99</span>
               <span class="text-slate-400 text-xs uppercase tracking-wider ml-1">/ one-time payment</span>
-              <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider ml-2">Lifetime Access</span>
+              <span class="text-[10px] text-blue-400 font-bold uppercase tracking-wider ml-2">No Subscriptions</span>
             </div>
             <ul class="space-y-3.5 text-xs text-slate-300 mb-8">
-              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span class="font-bold text-white">High-Fidelity Word (.docx) Reconstruction</span></li>
+              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span class="font-bold text-white">Monthly Expense Intelligence & Automatic Budget Reports</span></li>
+              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span class="font-bold text-white">Multi-Currency Engine (Rs, $, €, £ Auto-Reconcile)</span></li>
+              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span class="font-bold text-white">High-Fidelity Word (.docx) Typography Reconstruction</span></li>
               <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span class="font-bold text-white">Unlimited 30-Page Document Scans</span></li>
-              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>Archival-Grade 32-bit Maximum Quality</span></li>
-              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>Full GDPR & Privacy Consent Control</span></li>
-              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>Priority Google Gemini AI Processing</span></li>
-              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>Real-Time Dynamic Smart Naming</span></li>
-              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>Multi-Language Scanning (50+ Languages)</span></li>
-              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>100% Ad-Free Experience</span></li>
+              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>Archival-Grade 32-bit Maximum Image Quality</span></li>
+              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>1-Sentence AI TL;DR Document Summaries</span></li>
+              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>Stateless Security — Zero Permanent Server Storage</span></li>
+              <li class="flex items-start gap-3"><span class="text-emerald-400 font-bold">✓</span> <span>No Ads, Zero Trackers, 100% Offline Cached Mode</span></li>
             </ul>
           </div>
-          <a href="https://play.google.com/store/apps/details?id=com.cosmoscode.novadocsai" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-xs font-bold transition-all shadow-md shadow-blue-500/20">
-            Get App on Google Play
+          <a href="https://play.google.com/store/apps/details?id=com.cosmoscode.novadocsai" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-blue-500/20">
+            Get the Intelligent Doc Organizer – $7.99 Lifetime Pass
           </a>
         </div>
 
@@ -846,27 +1037,13 @@
             <p><strong>2. Cloud-Assisted Intelligence (Gemini Vision)</strong><br>
             To provide automated document naming and categorization, NovaDocs AI utilizes Google Gemini models via secure Vertex AI integration.<br>
             - Ephemeral Processing: When you scan a document, the document's text or image data is transmitted to a secure Google Cloud environment for momentary analysis (inference).<br>
-            - No Data Retention: This data is processed in-memory and is not stored permanently on the cloud server. Once the classification is returned to the app, the document data is purged from the processing session.<br>
-            - Privacy Protections: Through our use of Vertex AI, Google does not use your document data to train its foundational AI models.</p>
+            - No Data Retention: This data is processed in-memory and is not stored permanently on the cloud server. Once the classification is returned to the app, the document data is purged from the processing session.</p>
+
+            <p><strong>3. Expense Intelligence & Budget Extraction</strong><br>
+            When financial receipts or bills are scanned, line items and totals are computed statelessly in temporary memory. All generated monthly summaries are saved directly to your private Google Drive storage.</p>
             
-            <p><strong>3. Advertising & Monetization (Google AdMob & UMP GDPR Compliance)</strong><br>
-            The free version of NovaDocs AI is supported by Google AdMob using the User Messaging Platform (UMP) SDK. Users in the EEA and UK are provided with clear consent dialogues and can revoke or modify consent at any time via the in-app Ad Privacy Center. Users who purchase Vision AI Pro have all advertisements removed and data collection disabled within the App.</p>
-            
-            <p><strong>4. Data Security & Encryption</strong><br>
-            All data transmitted between NovaDocs AI and Google Drive is encrypted in transit using industry-standard Transport Layer Security (TLS) protocols.</p>
-            
-            <p><strong>5. Data Deletion & User Rights</strong><br>
-            - Document Deletion: You have full control over your data. To delete any document scanned by NovaDocs AI, simply delete it from your Google Drive.<br>
-            - Account Deletion: NovaDocs AI does not require you to create a proprietary account. We use Google Sign-In for authentication. Removing the App's access via your Google Account security settings will terminate all connections.</p>
-            
-            <p><strong>6. Contact Us</strong><br>
-            If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at:<br>
-            Email: <strong>supportatcosmoscode@gmail.com</strong></p>
-            
-            <p class="text-[10px] text-slate-500 border-t border-slate-800 pt-3 mt-3">
-              © 2026 Cosmos Code. All rights reserved.<br>
-              NovaDocs AI is a product of Cosmos Code.
-            </p>
+            <p><strong>Contact & Compliance:</strong><br>
+            Cosmos Code Support: supportatcosmoscode@gmail.com</p>
           </div>
         </div>
 
@@ -875,7 +1052,7 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-20 border-t border-slate-900 bg-slate-950/40 relative">
+  <section id="contact" class="py-20 border-t border-slate-800 bg-slate-950 relative">
     <div class="max-w-md mx-auto px-4">
       <div class="text-center mb-10">
         <h2 class="font-display text-3xl font-black text-white tracking-tight">
@@ -888,9 +1065,7 @@
 
       <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 lg:p-8 shadow-xl text-center">
         <div class="w-12 h-12 bg-blue-600/10 border border-blue-500/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-5">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-          </svg>
+          ✉️
         </div>
 
         <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Official Developer Support</span>
@@ -914,9 +1089,7 @@
             onclick="copyEmailAddress(this)"
             class="flex-1 py-3 px-4 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
-            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
+            <span>📋</span>
             <span class="btn-text">Copy Email</span>
           </button>
 
@@ -925,9 +1098,7 @@
             class="flex-1 py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Email Directly</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-            </svg>
+            <span>↗</span>
           </a>
         </div>
       </div>
@@ -935,40 +1106,204 @@
   </section>
 
   <!-- Footer -->
-  <footer class="py-12 border-t border-slate-900 bg-slate-950 text-slate-500 text-xs">
+  <footer class="py-12 border-t border-slate-800 bg-slate-950 text-slate-500 text-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-start gap-8">
         <div class="w-full md:w-2/3 text-left">
           <h4 class="text-white text-xs font-bold uppercase tracking-widest mb-3">Privacy & Compliance</h4>
           <p class="text-[10px] text-slate-500 leading-normal max-w-xl uppercase tracking-tighter">
-            NovaDocs AI is committed to your data security and is fully GDPR & UMP compliant. We do not store scanned documents on our servers. All processing is transient, and files are transmitted directly to your secure Google Drive storage using OAuth2 encryption.
+            NovaDocs AI is committed to your data security and is fully GDPR & UMP compliant. We do not store scanned documents on our servers. All processing is transient, and files are transmitted directly to your secure Google Drive storage using OAuth2 encryption. Includes an Ad Privacy Center for global users.
           </p>
         </div>
         <div class="flex flex-col items-start md:items-end gap-2 shrink-0 text-left md:text-right">
           <span class="text-xs text-slate-400 font-bold">supportatcosmoscode@gmail.com</span>
-          <div class="flex gap-4">
-            <span class="text-[10px] font-bold text-blue-500 uppercase cursor-pointer">GitHub</span>
-            <span class="text-[10px] font-bold text-blue-500 uppercase cursor-pointer">Twitter</span>
-            <span class="text-[10px] font-bold text-blue-500 uppercase cursor-pointer">LinkedIn</span>
-          </div>
-          <span class="text-[10px] text-slate-600">&copy; 2026 Cosmos Code. All rights reserved. <br> NovaDocs AI is a product of Cosmos Code.</span>
+          <span class="text-[10px] text-slate-600">© 2026 Cosmos Code. All rights reserved.</span>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Vanilla JS Interactivity -->
+  <!-- Vanilla Scripts for interactive dashboard, simulator, ad modal, and utilities -->
   <script>
-    // Mobile Navbar Menu toggle
-    const toggle = document.getElementById('mobile-menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-      });
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
     }
 
-    // Simulator Mode Switcher
+    // Expense Dashboard Data & Currency Switcher
+    const expenseData = {
+      USD: {
+        total: '$3,428.50',
+        taxDeductible: '$2,570.00',
+        merchants: [
+          { name: 'Ronin Workspace', category: 'Hardware & Office', amount: '$1,120.00', pct: 33, icon: '🏢', tldr: 'Invoice from RONIN for supplies & ergonomic workstation — $1,120.00' },
+          { name: 'Amazon Business', category: 'Electronics & Cables', amount: '$845.20', pct: 25, icon: '🛒', tldr: 'Order from Amazon for server rack accessories & USB-C hubs — $845.20' },
+          { name: 'AWS Cloud Services', category: 'Hosting & Cloud', amount: '$650.90', pct: 19, icon: '☁️', tldr: 'Monthly usage charge from AWS for database cluster & S3 — $650.90' },
+          { name: 'Delta Airlines', category: 'Travel & Demo', amount: '$500.00', pct: 15, icon: '✈️', tldr: 'Flight booking to SF client demo & tech summit — $500.00' },
+          { name: 'Starbucks Coffee', category: 'Meals & Meetings', amount: '$312.40', pct: 8, icon: '☕', tldr: 'Receipt from Starbucks for weekly partner & team sprint meetings — $312.40' }
+        ]
+      },
+      PKR: {
+        total: 'Rs 954,200',
+        taxDeductible: 'Rs 715,650',
+        merchants: [
+          { name: 'Ronin Workspace', category: 'Hardware & Office', amount: 'Rs 312,000', pct: 33, icon: '🏢', tldr: 'Invoice from RONIN for supplies & ergonomic workstation — Rs 312,000' },
+          { name: 'Amazon Business', category: 'Electronics & Cables', amount: 'Rs 235,500', pct: 25, icon: '🛒', tldr: 'Order from Amazon for server rack accessories & USB-C hubs — Rs 235,500' },
+          { name: 'AWS Cloud Services', category: 'Hosting & Cloud', amount: 'Rs 181,200', pct: 19, icon: '☁️', tldr: 'Monthly usage charge from AWS for database cluster & S3 — Rs 181,200' },
+          { name: 'Delta Airlines', category: 'Travel & Demo', amount: 'Rs 138,600', pct: 15, icon: '✈️', tldr: 'Flight booking to SF client demo & tech summit — Rs 138,600' },
+          { name: 'Starbucks Coffee', category: 'Meals & Meetings', amount: 'Rs 86,900', pct: 8, icon: '☕', tldr: 'Receipt from Starbucks for weekly partner & team sprint meetings — Rs 86,900' }
+        ]
+      },
+      EUR: {
+        total: '€3,150.00',
+        taxDeductible: '€2,362.50',
+        merchants: [
+          { name: 'Ronin Workspace', category: 'Hardware & Office', amount: '€1,030.00', pct: 33, icon: '🏢', tldr: 'Invoice from RONIN for supplies & ergonomic workstation — €1,030.00' },
+          { name: 'Amazon Business', category: 'Electronics & Cables', amount: '€775.00', pct: 25, icon: '🛒', tldr: 'Order from Amazon for server rack accessories & USB-C hubs — €775.00' },
+          { name: 'AWS Cloud Services', category: 'Hosting & Cloud', amount: '€598.00', pct: 19, icon: '☁️', tldr: 'Monthly usage charge from AWS for database cluster & S3 — €598.00' },
+          { name: 'Delta Airlines', category: 'Travel & Demo', amount: '€460.00', pct: 15, icon: '✈️', tldr: 'Flight booking to SF client demo & tech summit — €460.00' },
+          { name: 'Starbucks Coffee', category: 'Meals & Meetings', amount: '€287.00', pct: 8, icon: '☕', tldr: 'Receipt from Starbucks for weekly partner & team sprint meetings — €287.00' }
+        ]
+      },
+      GBP: {
+        total: '£2,710.00',
+        taxDeductible: '£2,032.50',
+        merchants: [
+          { name: 'Ronin Workspace', category: 'Hardware & Office', amount: '£885.00', pct: 33, icon: '🏢', tldr: 'Invoice from RONIN for supplies & ergonomic workstation — £885.00' },
+          { name: 'Amazon Business', category: 'Electronics & Cables', amount: '£668.00', pct: 25, icon: '🛒', tldr: 'Order from Amazon for server rack accessories & USB-C hubs — £668.00' },
+          { name: 'AWS Cloud Services', category: 'Hosting & Cloud', amount: '£515.00', pct: 19, icon: '☁️', tldr: 'Monthly usage charge from AWS for database cluster & S3 — £515.00' },
+          { name: 'Delta Airlines', category: 'Travel & Demo', amount: '£395.00', pct: 15, icon: '✈️', tldr: 'Flight booking to SF client demo & tech summit — £395.00' },
+          { name: 'Starbucks Coffee', category: 'Meals & Meetings', amount: '£247.00', pct: 8, icon: '☕', tldr: 'Receipt from Starbucks for weekly partner & team sprint meetings — £247.00' }
+        ]
+      }
+    };
+
+    let activeCurrency = 'USD';
+    let selectedMerchantIdx = 0;
+
+    function renderDashboardMerchants() {
+      const listEl = document.getElementById('dash-merchants-list');
+      const data = expenseData[activeCurrency];
+      
+      document.getElementById('dash-main-total').innerText = data.total;
+      document.getElementById('dash-tax-total').innerText = data.taxDeductible;
+
+      let html = '';
+      data.merchants.forEach((m, idx) => {
+        const isSel = idx === selectedMerchantIdx;
+        const borderClass = isSel ? 'bg-slate-900 border-blue-500/50 shadow-md shadow-blue-500/5' : 'bg-slate-950/40 border-slate-900 hover:border-slate-800';
+        const barClass = isSel ? 'bg-gradient-to-r from-blue-500 to-indigo-500 shadow-md' : 'bg-slate-700';
+        const barWidth = m.pct * 2.8;
+
+        html += '<div onclick="selectDashboardMerchant(' + idx + ')" class="p-2.5 rounded-xl border transition-all cursor-pointer ' + borderClass + '">' +
+          '<div class="flex items-center justify-between text-xs mb-1.5">' +
+            '<div class="flex items-center gap-2">' +
+              '<span>' + m.icon + '</span>' +
+              '<span class="font-bold text-white">' + m.name + '</span>' +
+              '<span class="text-[10px] text-slate-500 font-mono hidden sm:inline">(' + m.category + ')</span>' +
+            '</div>' +
+            '<div class="text-right">' +
+              '<span class="font-mono font-bold text-blue-400">' + m.amount + '</span>' +
+              '<span class="text-[10px] text-slate-500 font-mono ml-2">(' + m.pct + '%)</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-800/80">' +
+            '<div class="h-full rounded-full transition-all duration-500 ' + barClass + '" style="width: ' + barWidth + '%"></div>' +
+          '</div>' +
+        '</div>';
+      });
+      listEl.innerHTML = html;
+
+      // Update Preview
+      const selM = data.merchants[selectedMerchantIdx];
+      document.getElementById('dash-preview-title').innerText = '✨ AI TL;DR Preview: ' + selM.name;
+      document.getElementById('dash-preview-amount').innerText = selM.amount;
+      document.getElementById('dash-preview-text').innerText = '"' + selM.tldr + '"';
+    }
+
+    function selectDashboardMerchant(idx) {
+      selectedMerchantIdx = idx;
+      renderDashboardMerchants();
+    }
+
+    function setDashboardCurrency(curr) {
+      activeCurrency = curr;
+      ['USD', 'PKR', 'EUR', 'GBP'].forEach(c => {
+        const btn = document.getElementById('btn-curr-' + c.toLowerCase());
+        if (c === curr) {
+          btn.className = 'px-3 py-1.5 rounded-xl bg-blue-600 text-white shadow-md cursor-pointer transition-all scale-105';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 cursor-pointer transition-all';
+        }
+      });
+      renderDashboardMerchants();
+    }
+
+    // Initialize Dashboard on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDashboardMerchants();
+    });
+
+    // Scanner Simulator Mock Data
+    const mockData = {
+      receipt: {
+        title: "RECEIPT_SCAN.PDF",
+        t1: "RONIN WORKSPACE",
+        t2: "Supplies & Hardware: $1,120.00",
+        t3: "Date: Aug 17, 2026",
+        name: "finance_ronin_hardware_aug2026.docx",
+        folder: "Drive Folder: /Finance/Receipts/"
+      },
+      lease: {
+        title: "COMMERCIAL_LEASE.PDF",
+        t1: "METRO PROPERTIES CORP",
+        t2: "Lease Period: 2026-2029",
+        t3: "Signatures: Verified",
+        name: "legal_metro_commercial_lease_2026.docx",
+        folder: "Drive Folder: /Legal/Contracts/"
+      },
+      prescription: {
+        title: "CLINIC_RX_092.PDF",
+        t1: "DR. EMILY VANCE, MD",
+        t2: "Rx: Amoxicillin 500mg #30",
+        t3: "Refills: 2 Remaining",
+        name: "health_prescription_amoxicillin_2026.docx",
+        folder: "Drive Folder: /Health/Medical/"
+      },
+      electricity: {
+        title: "UTILITY_POWER_BILL.PDF",
+        t1: "GRID POWER UTILITY",
+        t2: "Total Due: $142.80",
+        t3: "Due Date: Sep 05, 2026",
+        name: "bills_gridpower_utility_aug2026.docx",
+        folder: "Drive Folder: /Bills/Utilities/"
+      }
+    };
+
+    let activeDocKey = 'receipt';
+
+    function selectDoc(key) {
+      activeDocKey = key;
+      document.querySelectorAll('.doc-btn').forEach(btn => {
+        btn.classList.remove('border-blue-500', 'bg-blue-600/10', 'text-white');
+        btn.classList.add('border-slate-800', 'bg-slate-900/50', 'text-slate-400');
+      });
+      const activeBtn = document.getElementById('btn-' + key);
+      if (activeBtn) {
+        activeBtn.classList.add('border-blue-500', 'bg-blue-600/10', 'text-white');
+        activeBtn.classList.remove('border-slate-800', 'bg-slate-900/50', 'text-slate-400');
+      }
+
+      const d = mockData[key];
+      document.getElementById('sim-disp-doc-title').innerText = d.title;
+      document.getElementById('sim-disp-doc-text-1').innerText = d.t1;
+      document.getElementById('sim-disp-doc-text-2').innerText = d.t2;
+      document.getElementById('sim-disp-doc-text-3').innerText = d.t3;
+      document.getElementById('sim-res-filename').innerText = d.name;
+      document.getElementById('sim-res-folder').innerText = d.folder;
+      document.getElementById('simulator-log-status').innerText = "Selected " + key + ". Ready to scan.";
+    }
+
     function switchSimulatorMode(mode) {
       const singleView = document.getElementById('sim-view-single');
       const batchView = document.getElementById('sim-view-batch');
@@ -978,121 +1313,13 @@
       if (mode === 'single') {
         singleView.classList.remove('hidden');
         batchView.classList.add('hidden');
-        tabSingle.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
-        tabSingle.classList.remove('text-slate-400');
-        tabBatch.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
-        tabBatch.classList.add('text-slate-400');
+        tabSingle.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-blue-600 text-white shadow-sm";
+        tabBatch.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white";
       } else {
         singleView.classList.add('hidden');
         batchView.classList.remove('hidden');
-        tabBatch.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
-        tabBatch.classList.remove('text-slate-400');
-        tabSingle.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
-        tabSingle.classList.add('text-slate-400');
-      }
-    }
-
-    // Document mock database
-    const mockData = {
-      receipt: {
-        title: "STARBUCKS_COFFEE.PNG",
-        text: "STARBUCKS COFFEE #48291\n1x Cafe Latte (Grande)   $4.95\n1x Blueberry Scone        $3.50\nTOTAL DUE                 $9.17",
-        price: "$9.17",
-        name: "finance_receipt_starbucks_2026.docx",
-        folder: "📁 NovaDocs/Finance/Receipts/",
-        category: "Finance"
-      },
-      lease: {
-        title: "LEASE_AGREEMENT.PNG",
-        text: "RESIDENTIAL LEASE AGREEMENT\nLandlord: John Doe Properties\nTenant: Alex Smith\nRent: $1,850/mo\nDeposit: $1,850",
-        price: "$1,850.00",
-        name: "legal_lease_agreement_123blue_2026.docx",
-        folder: "📁 NovaDocs/Legal/Contracts/",
-        category: "Legal"
-      },
-      prescription: {
-        title: "MEDICAL_PRESCRIPTION.PNG",
-        text: "METRO HEALTH CLINIC\nDr. Sarah Jenkins, MD\nJane Doe - Rx Amoxicillin 500mg\nTake 3x daily for 7 days",
-        price: "Rx Only",
-        name: "health_prescription_amoxicillin_2026.docx",
-        folder: "📁 NovaDocs/Health/Medical/",
-        category: "Health"
-      },
-      electricity: {
-        title: "UTILITY_BILL_JUNE.PNG",
-        text: "METRO POWER & LIGHT\nUsage Total: 1,180 kWh\nCURRENT CHARGES DUE: $142.50\nDue Date: July 15, 2026",
-        price: "$142.50",
-        name: "utility_electricity_bill_2026.docx",
-        folder: "📁 NovaDocs/Utilities/Bills/",
-        category: "Utilities"
-      }
-    };
-
-    let activeDocKey = 'receipt';
-
-    function selectDoc(key) {
-      activeDocKey = key;
-      
-      // Update button highlights
-      document.querySelectorAll('.doc-btn').forEach(b => {
-        b.classList.remove('border-blue-500', 'bg-blue-600/10', 'text-white');
-        b.classList.add('border-slate-800', 'bg-slate-900/50', 'text-slate-400');
-        const sp = b.querySelector('span');
-        if (sp) {
-          sp.classList.add('bg-slate-800', 'text-slate-500');
-          sp.classList.remove('bg-blue-600', 'text-white');
-        }
-      });
-
-      const selectedButton = document.getElementById('btn-' + key);
-      if (selectedButton) {
-        selectedButton.classList.add('border-blue-500', 'bg-blue-600/10', 'text-white');
-        selectedButton.classList.remove('border-slate-800', 'bg-slate-900/50', 'text-slate-400');
-        const badge = selectedButton.querySelector('span');
-        if (badge) {
-          badge.classList.remove('bg-slate-800', 'text-slate-500');
-          badge.classList.add('bg-blue-600', 'text-white');
-        }
-      }
-
-      // Reset simulator screen to State 1
-      document.getElementById('sim-state-idle').classList.remove('hidden');
-      document.getElementById('sim-state-analyzing').classList.add('hidden');
-      document.getElementById('sim-state-uploading').classList.add('hidden');
-      document.getElementById('sim-state-completed').classList.add('hidden');
-
-      // Update State 1 content
-      document.getElementById('sim-doc-header').innerHTML = '<span>' + mockData[key].title + '</span><span>June 30, 2026</span>';
-      document.getElementById('sim-doc-body').innerText = mockData[key].text;
-      document.getElementById('sim-doc-footer').innerText = mockData[key].price;
-      document.getElementById('sim-doc-detected-type').innerText = mockData[key].category;
-
-      // Update metadata content for later states
-      document.getElementById('sim-uploading-folder').innerText = mockData[key].folder;
-      document.getElementById('sim-completed-filename').innerText = mockData[key].name;
-      document.getElementById('sim-completed-folder').innerText = mockData[key].folder;
-      
-      const categoryBadge = document.getElementById('sim-completed-category');
-      categoryBadge.innerText = mockData[key].category;
-      categoryBadge.className = "text-[8px] px-1.5 py-0.5 rounded border font-mono " + getCategoryColorClasses(mockData[key].category);
-
-      document.getElementById('simulator-log-status').innerText = "Document preloaded. Press 'Start Scan' to analyze.";
-      
-      const laser = document.getElementById('sim-laser-sweeper');
-      laser.classList.add('hidden');
-
-      const btn = document.getElementById('simulate-run-btn');
-      btn.disabled = false;
-      btn.innerText = "Start Scan";
-    }
-
-    function getCategoryColorClasses(category) {
-      switch (category) {
-        case 'Finance': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
-        case 'Legal': return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
-        case 'Health': return 'bg-rose-500/10 text-rose-400 border-rose-500/30';
-        case 'Utilities': return 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30';
-        default: return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+        tabBatch.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-indigo-600 text-white shadow-sm";
+        tabSingle.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all text-slate-400 hover:text-white";
       }
     }
 
@@ -1104,7 +1331,6 @@
       btn.disabled = true;
       btn.innerText = "Analyzing...";
       
-      // Ensure we are back on State 1 to show scanning animation
       document.getElementById('sim-state-idle').classList.remove('hidden');
       document.getElementById('sim-state-analyzing').classList.add('hidden');
       document.getElementById('sim-state-uploading').classList.add('hidden');
@@ -1114,19 +1340,16 @@
       log.innerText = "Scanning page & executing local OCR extraction...";
 
       setTimeout(() => {
-        // Switch to State 2: Analyzing
         document.getElementById('sim-state-idle').classList.add('hidden');
         document.getElementById('sim-state-analyzing').classList.remove('hidden');
         log.innerText = "Querying stateless Gemini Vision for metadata structures & Word .docx reconstruction...";
 
         setTimeout(() => {
-          // Switch to State 3: Uploading
           document.getElementById('sim-state-analyzing').classList.add('hidden');
           document.getElementById('sim-state-uploading').classList.remove('hidden');
           log.innerText = "Uploading finalized Word (.docx) and PDF directly to Google Drive...";
 
           setTimeout(() => {
-            // Switch to State 4: Completed
             document.getElementById('sim-state-uploading').classList.add('hidden');
             document.getElementById('sim-state-completed').classList.remove('hidden');
             
@@ -1139,7 +1362,6 @@
       }, 1600);
     }
 
-    // Batch Simulation Runner
     function runBatchSimulation() {
       const btn = document.getElementById('btn-run-batch');
       const statusTag = document.getElementById('batch-status-tag');
@@ -1156,28 +1378,28 @@
       btn.disabled = true;
       btn.innerText = "Syncing Batch...";
       statusTag.innerText = "⚡ Parallel sync in progress...";
-      statusTag.className = "text-indigo-400 font-bold animate-pulse";
+      statusTag.className = "text-indigo-400 font-bold animate-pulse text-[10px]";
       logBanner.innerText = "Initiating parallel upload threads for 3 offline queued documents...";
 
       setTimeout(() => {
-        it1.className = "flex items-center justify-between p-2 rounded bg-indigo-950/40 border border-indigo-500/50 text-indigo-200";
+        it1.className = "flex items-center justify-between p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/50 text-indigo-200";
         treeFin.innerHTML = '<span class="text-emerald-400 font-bold">✓ offline_scan_01.pdf</span> <span class="text-[9px] text-slate-400">(Categorized: Finance)</span>';
         logBanner.innerText = "✓ Item 1 categorized & synced into /Finance/Receipts/";
       }, 1000);
 
       setTimeout(() => {
-        it2.className = "flex items-center justify-between p-2 rounded bg-amber-950/40 border border-amber-500/50 text-amber-200";
+        it2.className = "flex items-center justify-between p-3 rounded-xl bg-amber-950/40 border border-amber-500/50 text-amber-200";
         treeLeg.innerHTML = '<span class="text-emerald-400 font-bold">✓ offline_scan_02.pdf</span> <span class="text-[9px] text-slate-400">(Categorized: Legal)</span>';
         logBanner.innerText = "✓ Item 2 categorized & synced into /Legal/Contracts/";
       }, 2000);
 
       setTimeout(() => {
-        it3.className = "flex items-center justify-between p-2 rounded bg-rose-950/40 border border-rose-500/50 text-rose-200";
+        it3.className = "flex items-center justify-between p-3 rounded-xl bg-rose-950/40 border border-rose-500/50 text-rose-200";
         treeHea.innerHTML = '<span class="text-emerald-400 font-bold">✓ offline_scan_03.pdf</span> <span class="text-[9px] text-slate-400">(Categorized: Health)</span>';
         
         statusTag.innerText = "✓ Batch Complete (3 Files)";
-        statusTag.className = "text-emerald-400 font-bold";
-        logBanner.innerHTML = "<strong>Success:</strong> Batch AI sync completed. All 3 documents filed into respective Drive folders. <em>Note: Real-time context naming applies on capture; batch renaming coming in V1.20!</em>";
+        statusTag.className = "text-emerald-400 font-bold text-[10px]";
+        logBanner.innerHTML = "<strong>Success:</strong> Batch AI sync completed. All 3 documents filed into respective Drive folders.";
         
         btn.disabled = false;
         btn.innerText = "Re-run Batch Sync";
@@ -1185,7 +1407,6 @@
       }, 3000);
     }
 
-    // Modern Toast Notification element creator
     function showNotification(message, isSuccess = true) {
       let container = document.getElementById('toast-container');
       if (!container) {
@@ -1200,7 +1421,6 @@
       toast.innerHTML = '<div class="flex items-center gap-2"><span class="' + (isSuccess ? 'text-emerald-400 font-bold' : 'text-blue-400 font-bold') + '">' + (isSuccess ? '✓' : 'ℹ') + '</span><span>' + message + '</span></div>';
       container.appendChild(toast);
       
-      // Trigger CSS transition reflow
       toast.offsetHeight;
       toast.classList.remove('translate-y-2', 'opacity-0');
       
@@ -1212,7 +1432,6 @@
       }, 3000);
     }
 
-    // Ad Rewarder logic
     let adInterval;
     let timer = 5;
 
@@ -1240,7 +1459,7 @@
     }
 
     function copyPrivacyToClipboard() {
-      const copyText = "Privacy Policy for NovaDocs AI\n\nEffective Date: June 7, 2026\n\nNovaDocs AI ('we,' 'our,' or 'the App') is a productivity tool designed to help you scan, organize, and archive documents directly to your personal Google Drive. We value your privacy and are committed to being transparent about how your data is handled.\n\nThe NovaDocs Privacy Promise: We do not own, store, or sell your documents. Your data belongs to you. We use industry-standard encryption and secure cloud-assisted intelligence to organize your files without compromising your privacy.\n\nContact: supportatcosmoscode@gmail.com\n\n© 2026 Cosmos Code. All rights reserved.\nNovaDocs AI is a product of Cosmos Code.";
+      const copyText = "Privacy Policy for NovaDocs AI\n\nEffective Date: June 7, 2026\n\nNovaDocs AI ('we,' 'our,' or 'the App') is a productivity tool designed to help you scan, organize, and archive documents directly to your personal Google Drive. We value your privacy and are committed to being transparent about how your data is handled.\n\nContact: supportatcosmoscode@gmail.com\n\n© 2026 Cosmos Code. All rights reserved.";
       navigator.clipboard.writeText(copyText);
       showNotification("Privacy Policy copied to clipboard!");
     }
